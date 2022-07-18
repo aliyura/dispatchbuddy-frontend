@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import OtpInput from "react-otp-input";
+import { Logo } from "../../Atoms";
 import LoginStyle from "../login/Login.style";
 
 function Verification() {
