@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import { SignUp, Login, Verification, ForgotPassword} from "./pages";
+import { SignUp, Login, Verification, ForgotPassword, CreateNewPassword} from "./pages";
 
 function App() {
   return (
@@ -9,7 +9,8 @@ function App() {
       <Route exact path="/" element={<App />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />      
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/new-password" element={<CreateNewPassword />} />    
       <Route path="/verification" element={<Verification />} />
     </Routes>
   );

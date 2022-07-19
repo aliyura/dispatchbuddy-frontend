@@ -2,5 +2,6 @@ import SignUp from './Organisms/signup/SignUp'
 import Login from './Organisms/login/Login'
 import Verification from './Organisms/verificationPage/Verification'
 import ForgotPassword from './Organisms/forgotPassword/ForgotPassword'
+import CreateNewPassword from './Organisms/createNewPassword/CreateNewPassword'
 
-export { SignUp, Login, Verification, ForgotPassword }
+export { SignUp, Login, Verification, ForgotPassword, CreateNewPassword }
