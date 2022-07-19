@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const LoginStyle = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #e5e5e5;
   padding-top: 2rem;
   font-size: 0.8rem;
@@ -24,10 +24,16 @@ const LoginStyle = styled.div`
     }
     #bottom {
       text-align: center;
-      a {
+      color:#21334F;
+      a,
+      span {
         color: #580aff;
         font-weight: 700;
       }
+    }
+    #verification-description {
+      margin-bottom: 2rem;
+      color: #21334f;
     }
     @media (max-width: 500px) {
       width: 80%;
