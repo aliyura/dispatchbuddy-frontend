@@ -10,17 +10,12 @@ const ForgotPasswordStyle = styled.div`
     width: 52%;
     background-color: #fff;
     margin: auto;
-    padding: 4rem 0;
+    padding: 2.9rem 0;
 
     h1 {
       width: 44%;
       margin: auto;
       font-size: 1.13rem;
-    }
-    h2 {
-      width: 44%;
-      margin: auto;
-      font-size: 0.50rem; 
     }
     #bottom {
       text-align: center;
@@ -29,6 +24,11 @@ const ForgotPasswordStyle = styled.div`
         font-weight: 700;
       }
     }
+    #forgotpassword-description {
+        margin-bottom: 2rem;
+        color: #21334f; 
+        font-size: 0.69rem; 
+     }
     @media (max-width: 500px) {
       width: 80%;
       h1 {

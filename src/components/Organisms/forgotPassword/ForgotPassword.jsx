@@ -13,8 +13,11 @@ function ForgotPassword() {
         <Logo />
         <div className="wrapper">
           <h1>Forgot Password?</h1>
-          <p>Enter the email or password associated with your account<br/>and we'll send an email with instructions to reset your password</p>
           <Form>
+            <p id="forgotpassword-description">
+                Enter the email or password associated with your account 
+                and we'll send an email with instructions to reset your password.
+            </p>
             <Field label="Email or Phone Number" placeholder="Email or Phone Number" type="email" />
             <Button onClick={handleSubmit}>Send</Button>
           </Form>
