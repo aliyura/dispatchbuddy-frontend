@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import { SignUp, Login } from "./pages";
+import { SignUp, Login, ForgotPassword} from "./pages";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <Route exact path="/" element={<App />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />      
     </Routes>
   );
 }
