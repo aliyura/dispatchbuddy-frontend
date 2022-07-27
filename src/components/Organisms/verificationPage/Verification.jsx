@@ -9,16 +9,10 @@ function Verification() {
     alert("Reset");
   }
   const [code, setCode] = useState("");
-  if (code.toString().length === 4) {
-    setTimeout(() => {
-      {
-        alert("send");
-      }
-    }, 5);
-  }
+  if (code.toString().length === 4) setTimeout(() => alert("send"), 5);
+
   const handleChange = (code) => setCode(code);
   return (
-    <>
       <LoginStyle>
         <Logo />
         <div className="wrapper">
@@ -59,7 +53,6 @@ function Verification() {
           </p>
         </div>
       </LoginStyle>
-    </>
   );
 }
 

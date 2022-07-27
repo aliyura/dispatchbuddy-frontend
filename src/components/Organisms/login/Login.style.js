@@ -7,15 +7,15 @@ const LoginStyle = styled.div`
   padding-top: 2rem;
   font-size: 0.8rem;
   .wrapper {
-    width: 52%;
+    width: 60%;
     background-color: #fff;
     margin: auto;
-    padding: 4rem 0;
+    padding: 6rem 0;
 
     h1 {
-      width: 44%;
+      width: 55.48%;
       margin: auto;
-      font-size: 1.13rem;
+      font-size: 1.29rem;
     }
     #forgot-password {
       margin: -0.5rem 0 1.5rem;

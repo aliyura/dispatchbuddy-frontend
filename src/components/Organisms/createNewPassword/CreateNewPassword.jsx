@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Logo } from "../../Atoms";
-import Field from "../../Molecules";
+import {Field} from "../../Molecules";
 import CreateNewPasswordStyle from "./CreateNewPassword.style";
 
 function CreateNewPassword() {
