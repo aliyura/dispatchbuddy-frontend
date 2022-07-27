@@ -15,7 +15,7 @@ const HomepageStyle = styled.main`
     justify-content: space-between;
     margin-bottom: 6rem;
     .text {
-      width: 47%;
+      width: 48%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -25,7 +25,7 @@ const HomepageStyle = styled.main`
       }
     }
     .image-container {
-      width: 47%;
+      width: 48%;
       position: relative;
       .shadow {
         height: 86%;

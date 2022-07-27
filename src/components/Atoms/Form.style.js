@@ -7,7 +7,7 @@ const Form = styled.form`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin: auto;
   p {
     align-self: flex-start;
