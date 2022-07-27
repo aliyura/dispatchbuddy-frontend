@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FooterStyle = styled.footer`
   background-color: #1a1a1a;
-  padding: 3rem 11.88rem 1.9rem;
+  padding: 3rem 13.2% 1.9rem;
   .footer-bottom {
     color: #fff;
     width: 100%;
@@ -18,6 +18,15 @@ export const FooterStyle = styled.footer`
       .icon-wrapper {
         width: 20%;
       }
+    }
+  }
+  @media (max-width: 540px) {
+    .footer-bottom {
+      flex-direction: column-reverse;
+      .footer-icons {
+      width: 60%;
+      margin-bottom: 1.2rem;
+    }
     }
   }
 `;

@@ -13,7 +13,7 @@ const SignUpStyle = styled.div`
     padding: 4rem 0;
 
     h1 {
-      width: 44%;
+      width: 55.48%;
       margin: auto;
       font-size: 1.13rem;
     }

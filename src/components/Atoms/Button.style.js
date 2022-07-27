@@ -8,6 +8,7 @@ const Button = styled.button`
   border-color: #580aff;
   border-style: solid;
   padding: 0.8rem;
+  margin-top: 1.14rem;
 `;
 
 export default Button;

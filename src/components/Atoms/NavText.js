@@ -11,6 +11,9 @@ const NavText = styled(NavLink)`
   &.${(props) => props.isActive} {
     color: #580aff;
   }
+  @media (max-width: 1024px) {
+    font-size: .8rem;
+  }
 `;
 
 //  const NavText = styled(NavLink)`

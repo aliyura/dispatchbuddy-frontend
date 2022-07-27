@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const FieldStyle = styled.div`
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.14rem;
   .input-wrapper {
     width: 100%;
     display: flex;

@@ -36,7 +36,7 @@ function Homepage() {
               </p>
             </div>
             <div className="locator">
-              <Form>
+              <Form locator>
                 <Field
                   label="Pick Up"
                   placeholder="Enter pick up location"

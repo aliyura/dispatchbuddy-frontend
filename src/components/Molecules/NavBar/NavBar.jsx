@@ -17,6 +17,7 @@ function NavBar() {
           Sign Up as Rider
         </NavText>
       </nav>
+      <div className="hamburger-menu"></div>
     </NavBarStyle>
   );
 }

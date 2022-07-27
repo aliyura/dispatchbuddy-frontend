@@ -12,7 +12,7 @@ function Logo({fillText, fillIcon}) {
 export default Logo;
 
 const LogoStyle = styled.div`
-  width: 14rem;
+  width: 12rem;
   margin: 0 auto 1rem;
   svg {
     width: 100%;
