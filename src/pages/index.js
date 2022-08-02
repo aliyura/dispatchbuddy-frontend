@@ -4,5 +4,6 @@ import Homepage from "./Homepage";
 import Verification from "./Verification";
 import ForgotPassword from "./ForgotPassword";
 import CreateNewPassword from "./CreateNewPassword";
+import RidersLocation from "./RidersLocation";
 
-export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword };
+export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, RidersLocation };
