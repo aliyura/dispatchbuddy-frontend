@@ -5,5 +5,6 @@ import Verification from './Organisms/verificationPage/Verification'
 import ForgotPassword from './Organisms/forgotPassword/ForgotPassword'
 import CreateNewPassword from './Organisms/createNewPassword/CreateNewPassword'
 import RidersLocation from './Organisms/ridersLocation/RidersLocation'
+import Ratings from './Organisms/ratings/Ratings'
 
-export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, RidersLocation }
+export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, RidersLocation, Ratings }
