@@ -11,21 +11,21 @@ export const login = async ({ grant_type, email, password }) => {
 
  // loadUser();  
 
-  // const params = new URLSearchParams();
-  // params.append("grant-type", grant_type);
-  // params.append("email", email);
-  // params.append("password", password);
+  const params = new URLSearchParams();
+  params.append("grant-type", grant_type);
+  params.append("email", email);
+  params.append("password", password);
   // axios.post("/foo", params);
   try {
     // const response = await axios.postForm(
     const response = await axios.post(
       "/oauth/token",
-      // params,
-      {
-        grant_type: grant_type,
-        username: email,
-        password,
-      },
+      params,
+      // {
+      //   grant_type: grant_type,
+      //   username: email,
+      //   password,
+      // },
       {
         headers: {
           "content-type": "application/x-www-form-urlencoded",
