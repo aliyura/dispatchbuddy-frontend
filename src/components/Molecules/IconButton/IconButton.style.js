@@ -7,11 +7,27 @@ export const IconButtonStyle = styled.div`
   border: 1px solid #580aff;
   border-radius: 0.6rem;
   justify-content: center;
+  cursor: pointer;
+  align-items: center;
   /* position: relative; */
-  .button-wrapper{
-    width:20%;
+  .button-wrapper {
+    width: 50%;
+    cursor: pointer;
+
+    button {
+      margin-top: 0;
+      padding-left: 0;
+      background-color: transparent;
+      transition: all 0.5sec;
+      cursor: pointer;
+    }
+    /* button:hover {
+      background-color: #580aff;
+      color: #fff;
+    } */
   }
-   .icon {
+
+  .icon {
     width: 1.4rem;
     height: 1.4rem;
     width: 20%;

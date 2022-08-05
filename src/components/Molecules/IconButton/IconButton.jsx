@@ -6,12 +6,11 @@ import { IconButtonStyle } from "./IconButton.style";
 function IconButton({ icon, children }) {
   return (
     <IconButtonStyle>
-      <div className="icon">{"icon"}</div>
-      {/* <div className="icon">
+      <div className="icon">
         <Star />
-      </div> */}
+      </div>
       <div className="button-wrapper">
-        <Button icon>{children}</Button>
+        <Button icon type="button">{children}</Button>
       </div>
     </IconButtonStyle>
   );

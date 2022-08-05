@@ -1,21 +1,19 @@
 import React from 'react'
-// import Button from '../../Atoms/Button.style';
 import IconButton from '../IconButton/IconButton';
-
-function HistoryCard() {
+import HistoryCardStyle from './HistoryCard.style';
+function HistoryCard({delivery}) {
   return (
-    <div>
+    <HistoryCardStyle>
       <div className="trip-info">
-        <p>Uche Okoro</p>
-        <p>N3,5000</p>
-        <p>3kg</p>
-        <p>Ikeja, Lagos</p>
+        <p>{delivery?.name}</p>
+        <p>{delivery?.price}</p>
+        <p>{delivery?.weight}</p>
+        <p>{delivery?.location}</p>
       </div>
       <div className="rating-btn">
-        {/* <Button type="button">Rate</Button> */}
         <IconButton>Rate</IconButton>
       </div>
-    </div>
+    </HistoryCardStyle>
   );
 }
 
