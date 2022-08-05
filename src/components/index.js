@@ -2,6 +2,7 @@ import {
   SignUp,
   Login,
   Verification,
+  Homepage,
   ForgotPassword,
   CreateNewPassword,
   MyDeliveries,
@@ -14,4 +15,5 @@ export {
   ForgotPassword,
   CreateNewPassword,
   MyDeliveries,
+  Homepage,
 };

@@ -4,7 +4,7 @@ import Verification from "./verificationPage/Verification";
 import ForgotPassword from "./forgotPassword/ForgotPassword";
 import CreateNewPassword from "./createNewPassword/CreateNewPassword";
 import MyDeliveries from "./myDeliveries/MyDeliveries";
-
+import  Homepage  from "./homepage/Homepage";
 export {
   SignUp,
   Login,
@@ -12,4 +12,5 @@ export {
   ForgotPassword,
   CreateNewPassword,
   MyDeliveries,
+  Homepage,
 };

@@ -10,6 +10,7 @@ const Button = styled.button`
   outline: :${(props) => (props.icon ? "#FFFFFF" : "#580AFF")};
   border-style: solid;
   padding: 0.8rem;
+  margin-top: 1.14rem;
 `;
 
 export default Button;
