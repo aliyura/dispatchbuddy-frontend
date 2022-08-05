@@ -10,7 +10,6 @@ function Verification() {
   }
   const [code, setCode] = useState("");
   if (code.toString().length === 4) setTimeout(() => alert("send"), 5);
-
   const handleChange = (code) => setCode(code);
   return (
       <LoginStyle>

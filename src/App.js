@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import { MyDeliveries } from "./components";
 import { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword} from "./pages";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/new-password" element={<CreateNewPassword />} />    
       <Route path="/verification" element={<Verification />} />
+      <Route path="/my_deliveries" element={ <MyDeliveries/>} />
     </Routes>
   );
 }
