@@ -7,7 +7,7 @@ const LoginStyle = styled.div`
   padding-top: 2rem;
   font-size: 0.8rem;
   .wrapper {
-    width: 60%;
+    width: 40%;
     background-color: #fff;
     margin: auto;
     padding: 6rem 0;
@@ -23,8 +23,9 @@ const LoginStyle = styled.div`
       color: #17a1fa;
     }
     #bottom {
-      text-align: center;
-      color:#21334F;
+      color: #21334f;
+      width: 55.48%;
+      margin: auto;
       a,
       span {
         color: #580aff;
@@ -37,7 +38,8 @@ const LoginStyle = styled.div`
     }
     @media (max-width: 500px) {
       width: 80%;
-      h1 {
+      h1,
+      #bottom {
         width: 80%;
       }
     }

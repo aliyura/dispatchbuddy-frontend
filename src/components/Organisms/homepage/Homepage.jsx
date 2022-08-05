@@ -50,7 +50,7 @@ function Homepage() {
                   icon={Location}
                   
                 />
-                <Button fill>Find riders</Button>
+                <Button fill type="button">Find riders</Button>
               </Form>
             </div>
           </section>

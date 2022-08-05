@@ -1,9 +1,9 @@
 {
   "data": [
-    { "path": "/", "text": "Home", "fill": false },
-    { "path": "/", "text": "Our Locations", "fill": false },
-    { "path": "/", "text": "Contact Us", "fill": false },
-    { "path": "/", "text": "Sign Up as Rider", "fill": true }
+    { "path": "/", "text": "Home", "fill": "" },
+    { "path": "/", "text": "Our Locations", "fill": "" },
+    { "path": "/", "text": "Contact Us", "fill": "" },
+    { "path": "/signup", "text": "Sign Up as Rider", "fill": "fill" }
   ]
 }
 

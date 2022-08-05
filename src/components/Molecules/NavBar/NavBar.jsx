@@ -11,7 +11,6 @@ function NavBar() {
       </div>
       <nav className="navbar-right">
         {data.data.map((info, index) => {
-          console.log(info);
           return (
             <NavText key={index} fill={info.fill} to={info.path}>
               {info.text}
