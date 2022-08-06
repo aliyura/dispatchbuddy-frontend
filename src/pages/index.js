@@ -5,5 +5,7 @@ import Verification from "./Verification";
 import ForgotPassword from "./ForgotPassword";
 import CreateNewPassword from "./CreateNewPassword";
 import ProfilePage from './ProfilePage';
+import UpdatePasswordPage from './UpdatePasswordPage';
+import EditProfilePage from './EditProfilePage';
 
-export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, ProfilePage };
+export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, ProfilePage, UpdatePasswordPage, EditProfilePage };

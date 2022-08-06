@@ -7,6 +7,8 @@ import {
   CreateNewPassword,
   MyDeliveries,
   Profile,
+  UpdatePassword,
+  EditProfile,
 } from "./Organisms";
 
 export {
@@ -18,4 +20,6 @@ export {
   MyDeliveries,
   Homepage,
   Profile,
+  UpdatePassword,
+  EditProfile,
 };
