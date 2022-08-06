@@ -5,6 +5,7 @@ import ForgotPassword from "./forgotPassword/ForgotPassword";
 import CreateNewPassword from "./createNewPassword/CreateNewPassword";
 import MyDeliveries from "./myDeliveries/MyDeliveries";
 import  Homepage  from "./homepage/Homepage";
+import Profile from './profile/Profile';
 export {
   SignUp,
   Login,
@@ -13,4 +14,5 @@ export {
   CreateNewPassword,
   MyDeliveries,
   Homepage,
+  Profile,
 };

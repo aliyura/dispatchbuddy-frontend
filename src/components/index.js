@@ -6,6 +6,7 @@ import {
   ForgotPassword,
   CreateNewPassword,
   MyDeliveries,
+  Profile,
 } from "./Organisms";
 
 export {
@@ -16,4 +17,5 @@ export {
   CreateNewPassword,
   MyDeliveries,
   Homepage,
+  Profile,
 };

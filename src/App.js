@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { MyDeliveries } from "./components";
-import { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword} from "./pages";
+import { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, ProfilePage} from "./pages";
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
       <Route path="/new-password" element={<CreateNewPassword />} />    
       <Route path="/verification" element={<Verification />} />
       <Route path="/my_deliveries" element={ <MyDeliveries/>} />
+      <Route path="/profile" element={ <ProfilePage/>} />
     </Routes>
   );
 }
