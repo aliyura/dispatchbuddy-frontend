@@ -22,9 +22,12 @@ const SignUpStyle = styled.div`
     //   align-self: flex-start;
     //   color: #17a1fa;
     // }
-    
+    .submit_btn{
+      cursor: pointer;
+    }
     #bottom {
       text-align: center;
+      
       a {
         color: #580aff;
         font-weight: 700;

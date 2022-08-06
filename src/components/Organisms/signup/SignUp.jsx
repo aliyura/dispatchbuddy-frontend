@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Logo } from "../../Atoms";
 import {Field} from "../../Molecules";
 import SignUpStyle from "./SignUp.style";
+import {NavLink} from 'react-router-dom';
 
 function SignUp() {
   const handleSubmit = () => {
@@ -22,10 +23,13 @@ function SignUp() {
               placeholder="Enter your password"
               label="Password"
             />
-            <Button onClick={handleSubmit}>Sign Up</Button>
+            <Button className='submit_btn' onClick={handleSubmit}>Sign Up</Button>
           </Form>
           <p id="bottom">
-            Already have an account? <a href="www">Login</a>
+            Already have an account? 
+            <NavLink to="/login" className='login_link'>
+             Login
+            </NavLink>
           </p>
         </div>
       </SignUpStyle>
