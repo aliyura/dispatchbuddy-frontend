@@ -1,21 +1,19 @@
-import React, { useState} from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import { Button, Form, Logo } from "../../Atoms";
 import { Field } from "../../Molecules";
 import CreateNewPasswordStyle from "./CreateNewPassword.style";
-// import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../../../context/AuthProvider";
 import { reset } from "../../../api";
-
+import swal from "sweetalert";
 
 const initial = {
-  // email:"",
   password: "",
   confirmPassword: "",
 };
 
 function CreateNewPassword() {
-  // const { setAuth } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const [state] = useContext(AuthContext);
+  let { username } = state;
   const [formData, setFormData] = useState(initial);
   const handleChange = (e) => {
     setFormData({
@@ -25,30 +23,37 @@ function CreateNewPassword() {
   };
   const formComplete = formData.password && formData.confirmPassword;
 
-  const handleSubmit = async(e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!formComplete) alert("All fields are required");
-    if (formData.password !== formData.confirmPassword) alert("Incorrect password")
+    if (formData.password !== formData.confirmPassword)
+      alert("Incorrect password");
     else {
-            console.log(formData);
-
-      const { data, error } = await reset(formData);
-      console.log(formData);
+      // console.log(formData);
+      const { data, error } = await reset(username, formData);
+      // console.log(formData);
       if (data?.data?.success) {
-        // const accessToken = data?.accessToken;
-        // setAuth({
-        //   password: formData.password,
-        //   token: accessToken,
-        // });
-        console.log(formData);
-        alert("Successful");
-        return navigate("/");
+        // console.log(formData);
+        swal({
+          text: "Password reset was successful",
+          icon: "success",
+          button: false,
+          timer: 3000,
+        });
+        // return navigate("/");
       } else if (!data?.data?.success) {
-        alert(data?.data?.message);
+        swal("Oops", data?.data?.message, "error", {
+          button: false,
+          timer: 3000,
+        });
       } else {
-        alert(error?.message);
+        swal("Oops", error, "error", {
+          button: false,
+          timer: 3000,
+        });
       }
-    }  };
+    }
+  };
   return (
     <>
       <CreateNewPasswordStyle>

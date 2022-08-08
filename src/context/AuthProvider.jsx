@@ -34,14 +34,16 @@ const AppReducer = (state, action) => {
   switch (action.type) {
     // USER
     case "LOAD_USER":
-      return { ...state, ...(loadUser(token)) };
+      return { ...state, ...loadUser(token) };
     case "LOGIN_START":
       return { ...state, loggingIn: true };
     case "LOGIN_SUCCESS":
       setAuthToken(token);
-      return { ...state,loggingIn: false, token: action.payload };
+      return { ...state, loggingIn: false, token: action.payload };
+    case "FORGOT_PASSWORD_SUCCESS":
+      return { ...state, username: action.payload};
     case "LOGIN_FAILURE":
-      return { ...state,loggingIn: false, loginError: action.payload };
+      return { ...state, loggingIn: false, loginError: action.payload };
     case "LOGOUT":
       localStorage.removeItem(REACT_APP_AUTH_TOKEN);
       localStorage.removeItem("user");

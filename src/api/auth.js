@@ -1,6 +1,4 @@
 import axios from "./axios";
-import { setAuthToken } from "../utils";
-// const { REACT_APP_AUTH_TOKEN } = process.env;
 
 // import queryString from "querystring"
 export const login = async ({ grant_type, email, password }) => {
@@ -15,7 +13,6 @@ export const login = async ({ grant_type, email, password }) => {
   params.append("grant-type", grant_type);
   params.append("email", email);
   params.append("password", password);
-  // axios.post("/foo", params);
   try {
     // const response = await axios.postForm(
     const response = await axios.post(
@@ -50,21 +47,7 @@ export const login = async ({ grant_type, email, password }) => {
   }
 };
 
-// export const setCookie = (name, value, days, path = "/") => {
-//   let expires = "";
-//   if (days) {
-//     let date = new Date();
-//     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-//     expires = `; expires=${date.toUTCString()};`;
-//   }
-//   document.cookie = `${name}=${value}${expires}; path=${path}`;
-// };
 
-
-
-export const getAuthToken = () => {
-  return localStorage.getItem("token");
-};
 export const signup = async ({
   email,
   password,
@@ -123,12 +106,13 @@ export const verify = async ({ email = "emma@gmail.com", otp }) => {
   }
 };
 
-export const validate = async ({ email = "emma@gmail.com" }) => {
+export const validate = async ( username = "emma@gmail.com" ) => {
+  console.log(username);
   try {
     const response = await axios.post(
       "api/user/validate",
       JSON.stringify({
-        username: email,
+        username
       }),
       {
         headers: { "Content-type": "application/json" },
@@ -147,12 +131,13 @@ export const validate = async ({ email = "emma@gmail.com" }) => {
   }
 };
 
-export const reset = async ({ email = "net.rabiualiyu@gmail.com", password }) => {
+export const reset = async (username = "net.rabiualiyu@gmail.com", { password }) => {
+  // console.log(username, password)
   try {
     const response = await axios.post(
       "api/user/password-reset",
       JSON.stringify({
-        username: email,
+        username,
         password,
       }),
       {

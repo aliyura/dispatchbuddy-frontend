@@ -5,40 +5,58 @@ import { Form, Logo } from "../../Atoms";
 import LoginStyle from "../login/Login.style";
 import { AuthContext } from "../../../context/AuthProvider";
 import { verify, validate } from "../../../api";
+import swal from "sweetalert";
 
-let email = "jessyinks14@gmail.com";
+// let email = "jessyinks14@gmail.com";
 function Verification() {
-  const { setAuth } = useContext(AuthContext);
+  const [state] = useContext(AuthContext);
   const navigate = useNavigate();
 
+  let { username } = state;
   async function handleResend() {
-    const { data, error } = await validate(email);
-    console.log(email);
+    const { data, error } = await validate(username);
+    console.log(username);
     if (data?.data?.success) {
       alert("Successful");
+    swal("Resent", data?.data?.message, "success", {
+      button: false,
+      timer: 3000,
+    });
       setCode("");
-      setAuth();
     } else if (!data?.data?.success) {
-      alert(data?.data?.message);
+  swal("Oops", data?.data?.message, "error", {
+    button: false,
+    timer: 3000,
+  });
     } else {
-      alert(error?.message);
-    }
+  swal("Oops", error, "error", {
+    button: false,
+    timer: 3000,
+  });    }
   }
   const [code, setCode] = useState("");
   async function handleSubmit() {
-    const { data, error } = await verify(email, code);
+    const { data, error } = await verify(username, code);
     console.log(code);
     if (data?.data?.success) {
-      alert("Successful");
+      swal({
+        text: "Login was Successful",
+        icon: "success",
+        button: false,
+        timer: 3000,
+      });
       setCode("");
       return navigate("/login");
     } else if (!data?.data?.success) {
-      console.log(data?.data);
-      alert(data?.data?.message);
-      setCode("");
+      swal("Oops", data?.data?.message, "error", {
+        button: false,
+        timer: 3000,
+      });
     } else {
-      console.log(error);
-      alert(error?.message);
+      swal("Oops", error, "error", {
+        button: false,
+        timer: 3000,
+      });
     }
   }
   if (code.toString().length >= 4)

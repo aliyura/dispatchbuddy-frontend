@@ -5,6 +5,7 @@ import { Field } from "../../Molecules";
 import LoginStyle from "./Login.style";
 import { AuthContext } from "../../../context/AuthProvider";
 import { login } from "../../../api";
+import swal from "sweetalert";
 
 const initial = {
   grant_type: "password",
@@ -12,7 +13,7 @@ const initial = {
   password: "",
 };
 function Login() {
-    const [, dispatch] = useContext(AuthContext);
+  const [, dispatch] = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initial);
   const handleChange = (e) => {
@@ -30,19 +31,28 @@ function Login() {
       const { data, error } = await login(formData);
       if (data?.data?.success) {
         // setAuthToken(token)
-        dispatch({ type:"LOGIN_SUCCESS", payload: data?.data?.token });
-        alert("Successful");
-
+        dispatch({ type: "LOGIN_SUCCESS", payload: data?.data?.token });
+        swal({
+          text: "Login was Successful",
+          icon: "success",
+          button: false,
+          timer: 3000,
+        });
         return navigate("/profile");
       } else if (!data?.data?.success) {
-        // alert(data?.data?.message);
-             dispatch({
-               type: "LOGIN_FAILURE",
-               payload: data?.data?.message,
-             }); 
-        alert("Failed");
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: data?.data?.message,
+        });
+        swal("Oops", data?.data?.message, "error", {
+          button: false,
+          timer: 3000,
+        });
       } else {
-        alert(error?.message);
+        swal("Oops", error, "error", {
+          button: false,
+          timer: 3000,
+        });
       }
     }
   };

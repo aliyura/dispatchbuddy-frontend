@@ -1,5 +1,6 @@
 import React, { useContext, useEffect} from "react";
 import { AuthContext } from "../context/AuthProvider";
+import { NavBar } from "../components/Molecules";
 function Profile() {
     const [state, dispatch] = useContext(AuthContext);
     console.log(state);
@@ -11,7 +12,7 @@ function Profile() {
 
   return (
     <div>
-      <h1>Profile</h1>
+      <NavBar/>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Logo } from "../../Atoms";
 import { Field } from "../../Molecules";
 import SignUpStyle from "./SignUp.style";
-import { AuthContext } from "../../../context/AuthProvider";
+// import { AuthContext } from "../../../context/AuthProvider";
 import { signup } from "../../../api";
+import swal from "sweetalert";
 
 const initial = {
   name: "",
@@ -13,7 +14,7 @@ const initial = {
   password: "",
 };
 function SignUp() {
-  const { setAuth } = useContext(AuthContext);
+  // const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initial);
   const handleChange = (e) => {
@@ -31,20 +32,24 @@ function SignUp() {
       const { data, error } = await signup(formData);
       console.log(formData);
       if (data?.data?.success) {
-        // const accessToken = data?.accessToken;
-        // setAuth({
-        //   user: formData.email,
-        //   password: formData.password,
-        //   token: accessToken,
-        // });
-        // console.log(formData);
         console.log(data);
-        alert("Successful");
+        swal({
+          text: "Login was Successful",
+          icon: "success",
+          button: false,
+          timer: 3000,
+        });
         return navigate("/verification");
       } else if (!data?.data?.success) {
-        alert(data?.data?.message);
+        swal("Oops", data?.data?.message, "error", {
+          button: false,
+          timer: 3000,
+        });
       } else {
-        alert(error?.message);
+        swal("Oops", error, "error", {
+          button: false,
+          timer: 3000,
+        });
       }
     }
   };
