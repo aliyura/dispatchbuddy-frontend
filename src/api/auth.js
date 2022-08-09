@@ -10,29 +10,32 @@ export const login = async ({ grant_type, email, password }) => {
  // loadUser();  
 
   const params = new URLSearchParams();
-  params.append("grant-type", grant_type);
+  params.append("grant_type", grant_type);
   params.append("email", email);
   params.append("password", password);
   try {
     // const response = await axios.postForm(
+      const basicAuth = 'Basic ' + window.btoa('web-client:password');
+ 
+    // let headers = new HttpHeaders(
+    //   {
+    //     'Content-type': 'application/x-www-form-urlencoded',
+    //     'Authorization': basicAuth
+    //   });
     const response = await axios.post(
       "/oauth/token",
       params,
-      // {
-      //   grant_type: grant_type,
-      //   username: email,
-      //   password,
-      // },
       {
         headers: {
-          "content-type": "application/x-www-form-urlencoded",
-          accept: "application/x-www-form-urlencoded",
+          'Authorization': basicAuth,
+          "Content-type": "application/x-www-form-urlencoded",
+          // accept: "application/x-www-form-urlencoded",
         },
-        auth: {
-          username: "web-client",
-          password: "password",
-        },
-        withCredentials: true,
+        // auth: {
+        //   username: "web-client",
+        //   password: "password",
+        // },
+        // withCredentials: true,
       }
     );
     return {
