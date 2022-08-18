@@ -1,7 +1,6 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import './App.css'
-import { MyDeliveries } from './components'
+import React, { useEffect, useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
 import {
   SignUp,
   Login,
@@ -11,22 +10,66 @@ import {
   CreateNewPassword,
   ProfilePage,
   UpdatePasswordPage,
-  EditProfilePage
-} from './pages'
+  EditProfilePage,
+  NotFound,
+} from "./pages";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
+import { AuthContext} from "./context/AuthProvider";
+import { MyDeliveries } from "./components";
 
 function App() {
+  const [, dispatch] = useContext(AuthContext);
+
+  useEffect(() => {
+    
+    dispatch({ type: "LOAD_USER" });
+  }, [dispatch]);
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="*"
+        element={
+          localStorage.getItem(process.env.REACT_APP_AUTH_TOKEN) ? (
+            <>
+              <NotFound />
+            </>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
       <Route exact path="/" element={<Homepage />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/change-password" element={<UpdatePasswordPage />} />
+      <Route path="/my_deliveries" element={<MyDeliveries />} />
       <Route path="/new-password" element={<CreateNewPassword />} />
       <Route path="/verification" element={<Verification />} />
-      <Route path="/my_deliveries" element={<MyDeliveries />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/edit-profile" element={<EditProfilePage />} />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoutes>
+            <ProfilePage />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="/edit-profile"
+        element={
+          <ProtectedRoutes>
+            <EditProfilePage />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="/change-password"
+        element={
+          <ProtectedRoutes>
+            <UpdatePasswordPage />
+          </ProtectedRoutes>
+        }
+      />
     </Routes>
   )
 }

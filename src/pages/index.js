@@ -7,5 +7,17 @@ import CreateNewPassword from "./CreateNewPassword";
 import ProfilePage from './ProfilePage';
 import UpdatePasswordPage from './UpdatePasswordPage';
 import EditProfilePage from './EditProfilePage';
+import NotFound from "./NotFound";
 
-export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, ProfilePage, UpdatePasswordPage, EditProfilePage };
+export {
+  SignUp,
+  Login,
+  Homepage,
+  Verification,
+  ForgotPassword,
+  CreateNewPassword,
+  ProfilePage,
+  UpdatePasswordPage,
+  EditProfilePage,
+  NotFound,
+};
