@@ -3,18 +3,30 @@ import { Logo } from "../../Atoms";
 import NavText from "../../Atoms/NavText";
 import NavBarStyle from "./NavBar.style";
 import data from "./NavData";
+const { REACT_APP_AUTH_TOKEN } = process.env;
+
+
 function NavBar() {
+  const navData = localStorage.getItem(REACT_APP_AUTH_TOKEN) ? "registered" : "unregistered"
+console.log(navData)
   return (
     <NavBarStyle>
       <div className="navbar-left">
         <Logo />
       </div>
       <nav className="navbar-right">
-        {data.data.map((info, index) => {
-          console.log(info);
-          return (
+        {data[navData].map((info, index) => {
+          return info.text !== "dp" ? (
             <NavText key={index} fill={info.fill} to={info.path}>
               {info.text}
+            </NavText>
+          ) : (
+            <NavText
+              key={index}
+              to={info.path}
+              id="image"
+            >
+                <p>{info.text}</p>
             </NavText>
           );
         })}

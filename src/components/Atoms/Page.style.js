@@ -12,7 +12,6 @@ const PageStyle = styled.div`
   @media (max-width: 1130px) {
     padding: 4.4rem 4.88rem 6.2rem;
   }
-
 `;
 
 export default PageStyle;

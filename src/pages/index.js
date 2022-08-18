@@ -4,7 +4,22 @@ import Homepage from "./Homepage";
 import Verification from "./Verification";
 import ForgotPassword from "./ForgotPassword";
 import CreateNewPassword from "./CreateNewPassword";
+import ProfilePage from './ProfilePage';
+import UpdatePasswordPage from './UpdatePasswordPage';
+import EditProfilePage from './EditProfilePage';
+import NotFound from "./NotFound";
 import RidersLocation from "./RidersLocation";
 import RatingsPage from "./Ratings";
 
-export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword, RidersLocation, RatingsPage };
+export {
+  SignUp,
+  Login,
+  Homepage,
+  Verification,
+  ForgotPassword,
+  CreateNewPassword, RidersLocation, RatingsPage,
+  ProfilePage,
+  UpdatePasswordPage,
+  EditProfilePage,
+  NotFound,
+};
