@@ -4,7 +4,9 @@ import Homepage from "./Homepage";
 import Verification from "./Verification";
 import ForgotPassword from "./ForgotPassword";
 import CreateNewPassword from "./CreateNewPassword";
-import Profile from "./Profile";
+import ProfilePage from './ProfilePage';
+import UpdatePasswordPage from './UpdatePasswordPage';
+import EditProfilePage from './EditProfilePage';
 import NotFound from "./NotFound";
 
 export {
@@ -14,6 +16,8 @@ export {
   Verification,
   ForgotPassword,
   CreateNewPassword,
-  Profile,
+  ProfilePage,
+  UpdatePasswordPage,
+  EditProfilePage,
   NotFound,
 };
