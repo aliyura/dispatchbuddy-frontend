@@ -8,7 +8,9 @@ import {
   Verification,
   ForgotPassword,
   CreateNewPassword,
-  Profile,
+  ProfilePage,
+  UpdatePasswordPage,
+  EditProfilePage,
   NotFound,
 } from "./pages";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
@@ -41,19 +43,35 @@ function App() {
       <Route exact path="/" element={<Homepage />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/my_deliveries" element={<MyDeliveries />} />
       <Route path="/new-password" element={<CreateNewPassword />} />
       <Route path="/verification" element={<Verification />} />
       <Route
         path="/profile"
         element={
           <ProtectedRoutes>
-            <Profile />
+            <ProfilePage />
           </ProtectedRoutes>
         }
       />
-      <Route path="/my_deliveries" element={ <MyDeliveries/>} />
+      <Route
+        path="/edit-profile"
+        element={
+          <ProtectedRoutes>
+            <EditProfilePage />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="/change-password"
+        element={
+          <ProtectedRoutes>
+            <UpdatePasswordPage />
+          </ProtectedRoutes>
+        }
+      />
     </Routes>
-  );
+  )
 }
 
-export default App;
+export default App

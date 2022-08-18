@@ -17,17 +17,25 @@ const LoginStyle = styled.div`
       margin: auto;
       font-size: 1.29rem;
     }
+    .forgot-password{
+      margin: -0.5rem 0 1.5rem;
+      align-self: flex-start;
+      color: #17a1fa;
+    }
     #forgot-password {
       margin: -0.5rem 0 1.5rem;
       align-self: flex-start;
       color: #17a1fa;
     }
+    .submit_btn{
+      cursor: pointer;
+    }
     #bottom {
-      color: #21334f;
-      width: 55.48%;
-      margin: auto;
-      a,
-      span {
+      text-align: center;
+      color:#21334F;
+      
+      span, .create_account_link {
+        margin-left: 8px;
         color: #580aff;
         font-weight: 700;
       }

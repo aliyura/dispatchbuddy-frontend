@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Logo } from "../../Atoms";
 import { Field } from "../../Molecules";
 import SignUpStyle from "./SignUp.style";
-// import { AuthContext } from "../../../context/AuthProvider";
+import {NavLink} from 'react-router-dom';
 import { signup } from "../../../api";
 import swal from "sweetalert";
 
@@ -14,7 +14,6 @@ const initial = {
   password: "",
 };
 function SignUp() {
-  // const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initial);
   const handleChange = (e) => {
@@ -93,10 +92,13 @@ function SignUp() {
               formData={formData}
               handleChange={handleChange}
             />
-            <Button onClick={handleSubmit}>Sign Up</Button>
+            <Button className='submit_btn' onClick={handleSubmit}>Sign Up</Button>
           </Form>
           <p id="bottom">
-            Already have an account? <a href="www">Login</a>
+            Already have an account? 
+            <NavLink to="/login" className='login_link'>
+             Login
+            </NavLink>
           </p>
         </div>
       </SignUpStyle>
