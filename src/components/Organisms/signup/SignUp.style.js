@@ -13,7 +13,7 @@ const SignUpStyle = styled.div`
     padding: 4rem 0;
 
     h1 {
-      width: 44%;
+      width: 55.48%;
       margin: auto;
       font-size: 1.13rem;
     }
@@ -22,9 +22,12 @@ const SignUpStyle = styled.div`
     //   align-self: flex-start;
     //   color: #17a1fa;
     // }
-    
+    .submit_btn{
+      cursor: pointer;
+    }
     #bottom {
       text-align: center;
+      
       a {
         color: #580aff;
         font-weight: 700;

@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo  from "../../assets/images/Logo.png"
-function Logo() {
+import BrandLogo from "../../assets/icons/Logo.jsx"
+function Logo({fillText, fillIcon}) {
   return (
       <LogoStyle>
-          <img src={logo} alt="logo"/>
+      <BrandLogo fillText={fillText} fillIcon={fillIcon} />
     </LogoStyle>
   )
 }
@@ -12,9 +12,9 @@ function Logo() {
 export default Logo;
 
 const LogoStyle = styled.div`
-width: 14rem;
-margin: 0 auto 1rem;
-img{
+  width: 12rem;
+  margin: 0 auto 1rem;
+  svg {
     width: 100%;
-}
-`
+  }
+`;

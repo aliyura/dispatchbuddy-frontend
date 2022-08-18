@@ -1,4 +1,25 @@
-import SignUp from './Organisms/signup/SignUp'
-import Login from './Organisms/login/Login'
+import {
+  SignUp,
+  Login,
+  Verification,
+  Homepage,
+  ForgotPassword,
+  CreateNewPassword,
+  MyDeliveries,
+  Profile,
+  UpdatePassword,
+  EditProfile,
+} from "./Organisms";
 
-export { SignUp, Login}
+export {
+  SignUp,
+  Login,
+  Verification,
+  ForgotPassword,
+  CreateNewPassword,
+  MyDeliveries,
+  Homepage,
+  Profile,
+  UpdatePassword,
+  EditProfile,
+};

@@ -1,3 +1,5 @@
 import Field from "./Field/Field";
+import NavBar from "./NavBar/NavBar";
+import Footer from "./Footer/Footer";
 
-export default Field;
+export { Field, NavBar, Footer };
