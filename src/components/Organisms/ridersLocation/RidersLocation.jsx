@@ -1,10 +1,10 @@
 import React from "react";
-import { RNavBar, Maps } from "../../Molecules";
+import { Maps, NavBar } from "../../Molecules";
 
 function RidersLocation() {
   return (
     <>
-      <RNavBar />
+      <NavBar />
         <Maps />         
     </>
   );

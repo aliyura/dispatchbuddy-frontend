@@ -12,14 +12,22 @@ const NavBarStyle = styled.header`
   background-color: #fff;
   z-index: 5;
   overflow: hidden;
-  /* .navbar-right {
-    width: 40%;
-  } */
   .navbar-right {
     width: 36%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    #image{
+      height: 34px;
+      width: 36px;
+      border-radius: 50%;
+      background-color: purple;
+      color: #fff;
+      padding: .5rem;
+      p{
+        margin: auto;
+      }
+    }
   }
   .hamburger-menu {
     display: none;
