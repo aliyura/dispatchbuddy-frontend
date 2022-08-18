@@ -3,5 +3,7 @@ import NavBar from "./NavBar/NavBar";
 import Footer from "./Footer/Footer";
 import Card from "./card/Card";
 import RNavBar from "./NavBar copy/NavBar";
+import Maps from "./Maps/maps";
+import Places from "./Places/places";
 
-export { Field, NavBar, Footer, Card, RNavBar};
+export { Field, NavBar, Footer, Card, RNavBar, Maps, Places };
