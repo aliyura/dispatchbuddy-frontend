@@ -1,8 +1,12 @@
 import React from 'react'
 import {Profile} from '../components'
+import { NavBar } from "../components/Molecules";
 function ProfilePage() {
   return (
-    <Profile />
+    <div>
+      <NavBar/>
+      <Profile />
+    </div>
   )
 }
 
