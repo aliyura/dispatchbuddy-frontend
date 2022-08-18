@@ -1,9 +1,19 @@
-import SignUp from './Organisms/signup/SignUp'
-import Login from './Organisms/login/Login'
-import Homepage from './Organisms/homepage/Homepage'
-import Verification from './Organisms/verificationPage/Verification'
-import ForgotPassword from './Organisms/forgotPassword/ForgotPassword'
-import CreateNewPassword from './Organisms/createNewPassword/CreateNewPassword'
+import {
+  SignUp,
+  Login,
+  Verification,
+  Homepage,
+  ForgotPassword,
+  CreateNewPassword,
+  MyDeliveries,
+} from "./Organisms";
 
-
-export { SignUp, Login, Homepage, Verification, ForgotPassword, CreateNewPassword }
+export {
+  SignUp,
+  Login,
+  Verification,
+  ForgotPassword,
+  CreateNewPassword,
+  MyDeliveries,
+  Homepage,
+};

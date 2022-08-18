@@ -13,6 +13,7 @@ import {
 } from "./pages";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { AuthContext} from "./context/AuthProvider";
+import { MyDeliveries } from "./components";
 
 function App() {
   const [, dispatch] = useContext(AuthContext);
@@ -50,6 +51,7 @@ function App() {
           </ProtectedRoutes>
         }
       />
+      <Route path="/my_deliveries" element={ <MyDeliveries/>} />
     </Routes>
   );
 }
