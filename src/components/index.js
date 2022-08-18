@@ -10,13 +10,14 @@ import {
   UpdatePassword,
   EditProfile,
 } from "./Organisms";import RidersLocation from './Organisms/ridersLocation/RidersLocation'
+import Ratings from './Organisms/ratings/Ratings'
 
 export {
   SignUp,
   Login,
   Verification,
   ForgotPassword,
-  CreateNewPassword, RidersLocation,
+  CreateNewPassword, RidersLocation, Ratings,
   MyDeliveries,
   Homepage,
   Profile,

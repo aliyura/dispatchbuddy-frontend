@@ -5,5 +5,7 @@ import Card from "./card/Card";
 import RNavBar from "./NavBar copy/NavBar";
 import Maps from "./Maps/maps";
 import Places from "./Places/places";
+import Rating from "./rate/Rate";
+import RateNavBar from "./RateNav/RateNavBar";
 
-export { Field, NavBar, Footer, Card, RNavBar, Maps, Places };
+export { Field, NavBar, Footer, Card, RNavBar, Maps, Places , Rating, RateNavBar };

@@ -12,7 +12,7 @@ import {
   UpdatePasswordPage,
   EditProfilePage,
   NotFound,
-  RidersLocation} from "./pages";
+  RidersLocation, RatingsPage } from "./pages";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { AuthContext} from "./context/AuthProvider";
 import { MyDeliveries } from "./components";
@@ -47,6 +47,7 @@ function App() {
       <Route path="/new-password" element={<CreateNewPassword />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/location" element={<RidersLocation />} />
+      <Route path="/rate" element={<RatingsPage />} />
       <Route
         path="/profile"
         element={
