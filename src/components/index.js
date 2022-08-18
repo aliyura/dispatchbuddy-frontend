@@ -9,14 +9,14 @@ import {
   Profile,
   UpdatePassword,
   EditProfile,
-} from "./Organisms";
+} from "./Organisms";import RidersLocation from './Organisms/ridersLocation/RidersLocation'
 
 export {
   SignUp,
   Login,
   Verification,
   ForgotPassword,
-  CreateNewPassword,
+  CreateNewPassword, RidersLocation,
   MyDeliveries,
   Homepage,
   Profile,
