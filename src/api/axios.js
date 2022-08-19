@@ -1,6 +1,6 @@
-import axios from 'axios'
-
+import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
 
 export default axios.create({
-  baseURL: "https://api.dispatchbuddy.net/"
+  baseURL: REACT_APP_BASE_URL,
 });
