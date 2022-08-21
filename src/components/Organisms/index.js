@@ -8,6 +8,7 @@ import  Homepage  from "./homepage/Homepage";
 import Profile from './profile/Profile';
 import UpdatePassword from './updatePassword/updatePassword';
 import EditProfile from './editProfile/EditProfile';
+import SelectRider from './selectRider/SelectRider';
 
 export {
   SignUp,
@@ -20,4 +21,5 @@ export {
   Profile,
   UpdatePassword,
   EditProfile,
+  SelectRider,
 };
