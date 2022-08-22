@@ -1,8 +1,18 @@
 import styled from "styled-components";
 
 export const ProfileStyle = styled.div`
-    // border: 2px solid red;
-    padding: 3rem 24rem;
+    padding: 8rem 24rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    >div {
+        // border: 1px solid blue;
+        width: 60%;
+        box-shadow: 0 0 5px rgba(16, 24, 40, 0.05);
+        padding: 0.6rem 0;
+        border-radius: 8px;
+    }
     .header_profile{
         h1{
             font-weight: 700;
@@ -29,6 +39,7 @@ export const ProfileStyle = styled.div`
             list-style: none;
             // border: 1px solid yellow;
             li{
+                cursor: pointer;
                 padding: 1rem 0;
                 cursor: pointer;
                 span{
