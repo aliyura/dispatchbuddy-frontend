@@ -2,7 +2,7 @@ import React from "react";
 import { Logo } from "../../Atoms";
 import NavText from "../../Atoms/NavText";
 import NavBarStyle from "./NavBar.style";
-import data from "./NavData";
+import data from "./NavData.json";
 const { REACT_APP_AUTH_TOKEN } = process.env;
 
 
