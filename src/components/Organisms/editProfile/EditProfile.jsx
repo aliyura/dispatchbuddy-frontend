@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Logo } from '../../Atoms';
 import { Field } from '../../Molecules';
 import EditProfileStyle from './editProfile.style';
 import { useNavigate } from 'react-router-dom';
-import axios from "../../../api/axios";
+// import axios from "../../../api/axios";
 import countryData from './CountryData.json';
 
-import { AuthContext } from "../../../context/AuthProvider";
+// import { AuthContext } from "../../../context/AuthProvider";
 import { updateProfile } from "../../../api";
 import swal from "sweetalert";
-import { apiPost } from '../../../auth/apiHelper';
+// import { apiPost } from '../../../auth/apiHelper';
 
 const {REACT_APP_AUTH_TOKEN} = process.env;
 
