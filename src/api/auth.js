@@ -7,7 +7,7 @@ export const login = async ({ grant_type, email, password }) => {
   // _formData.append("email",email);
   // _formData.append("quantity",password);
 
- // loadUser();  
+  // loadUser();
 
   const params = new URLSearchParams();
   params.append("grant_type", grant_type);
@@ -15,29 +15,25 @@ export const login = async ({ grant_type, email, password }) => {
   params.append("password", password);
   try {
     // const response = await axios.postForm(
-      const basicAuth = 'Basic ' + window.btoa('web-client:password');
- 
+    const basicAuth = "Basic " + window.btoa("web-client:password");
+
     // let headers = new HttpHeaders(
     //   {
     //     'Content-type': 'application/x-www-form-urlencoded',
     //     'Authorization': basicAuth
     //   });
-    const response = await axios.post(
-      "/oauth/token",
-      params,
-      {
-        headers: {
-          'Authorization': basicAuth,
-          "Content-type": "application/x-www-form-urlencoded",
-          // accept: "application/x-www-form-urlencoded",
-        },
-        // auth: {
-        //   username: "web-client",
-        //   password: "password",
-        // },
-        // withCredentials: true,
-      }
-    );
+    const response = await axios.post("/oauth/token", params, {
+      headers: {
+        Authorization: basicAuth,
+        "Content-Type": "application/x-www-form-urlencoded",
+        // accept: "application/x-www-form-urlencoded",
+      },
+      // auth: {
+      //   username: "web-client",
+      //   password: "password",
+      // },
+      // withCredentials: true,
+    });
     return {
       data: response,
       error: null,
@@ -49,7 +45,6 @@ export const login = async ({ grant_type, email, password }) => {
     };
   }
 };
-
 
 export const signup = async ({
   email,
@@ -84,12 +79,12 @@ export const signup = async ({
   }
 };
 
-export const verify = async ({ email = "emma@gmail.com", otp }) => {
+export const verify = async ({ username = "emma@gmail.com", otp }) => {
   try {
     const response = await axios.post(
       "api/user/verify",
       JSON.stringify({
-        username: email,
+        username,
         otp,
       }),
       {
@@ -109,13 +104,13 @@ export const verify = async ({ email = "emma@gmail.com", otp }) => {
   }
 };
 
-export const validate = async ( username = "emma@gmail.com" ) => {
+export const validate = async (username = "emma@gmail.com") => {
   console.log(username);
   try {
     const response = await axios.post(
       "api/user/validate",
       JSON.stringify({
-        username
+        username,
       }),
       {
         headers: { "Content-type": "application/json" },
@@ -134,7 +129,10 @@ export const validate = async ( username = "emma@gmail.com" ) => {
   }
 };
 
-export const reset = async (username = "net.rabiualiyu@gmail.com", { password }) => {
+export const reset = async (
+  username = "net.rabiualiyu@gmail.com",
+  { password }
+) => {
   // console.log(username, password)
   try {
     const response = await axios.post(
@@ -160,3 +158,27 @@ export const reset = async (username = "net.rabiualiyu@gmail.com", { password })
   }
 };
 
+export const getAllRequests = async (
+ page=0, token
+) => {
+  console.log(page, token)
+  try {
+    const response = await axios.get(
+      `api/rider/requests?page=${page}`,
+      {
+        headers: { "Content-type": "application/json", "Authorization": `Bearer ${token}`  },
+        
+      }
+    );
+    const { data } = response;
+    return {
+      data: data.payload.content,
+      error: null,
+    };
+  } catch (err) {
+    return {
+      data: null,
+      error: err,
+    };
+  }
+};
