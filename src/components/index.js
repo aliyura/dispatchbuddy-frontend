@@ -9,17 +9,20 @@ import {
   Profile,
   UpdatePassword,
   EditProfile,
-} from "./Organisms";
+  SelectRider,
+} from "./Organisms";import RidersLocation from './Organisms/ridersLocation/RidersLocation'
+import Ratings from './Organisms/ratings/Ratings'
 
 export {
   SignUp,
   Login,
   Verification,
   ForgotPassword,
-  CreateNewPassword,
+  CreateNewPassword, RidersLocation, Ratings,
   MyDeliveries,
   Homepage,
   Profile,
   UpdatePassword,
   EditProfile,
+  SelectRider,
 };

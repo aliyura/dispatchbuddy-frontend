@@ -1,0 +1,40 @@
+{
+    "riders": [
+      {
+        "name": "Uche Okoro",
+        "location": "Ikeja, Lagos",
+        "phoneNumber": "08099662243",
+        "date": "Joined, June 25, 2022",
+        "contactRider": "Contact Rider"
+      },
+      {
+        "name": "Abdul Okoro",
+        "location": "Ikeja, Lagos",
+        "phoneNumber": "08099662243",
+        "date": "Joined, June 25, 2022",
+        "contactRider": "Contact Rider"
+      },
+      {
+        "name": "Halima Okoro",
+        "location": "Ikeja, Lagos",
+        "phoneNumber": "08099662243",
+        "date": "Joined, June 25, 2022",
+        "contactRider": "Contact Rider"
+      },
+      {
+        "name": "Bisi Okoro",
+        "location": "Ikeja, Lagos",
+        "phoneNumber": "08099662243",
+        "date": "Joined, June 25, 2022",
+        "contactRider": "Contact Rider"
+      },
+      {
+        "name": "Okoro Okoro",
+        "location": "Ikeja, Lagos",
+        "phoneNumber": "08099662243",
+        "date": "Joined, June 25, 2022",
+        "contactRider": "Contact Rider"
+      }
+    ]
+  }
+  

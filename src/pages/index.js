@@ -9,6 +9,8 @@ import UpdatePasswordPage from "./UpdatePasswordPage";
 import EditProfilePage from "./EditProfilePage";
 import NotFound from "./NotFound";
 import  MyDeliveries from "./MyDeliveries";
+import RidersLocation from "./RidersLocation";
+import RatingsPage from "./Ratings";
 
 export {
   SignUp,
@@ -16,7 +18,7 @@ export {
   Homepage,
   Verification,
   ForgotPassword,
-  CreateNewPassword,
+  CreateNewPassword, RidersLocation, RatingsPage,
   ProfilePage,
   MyDeliveries,
   UpdatePasswordPage,
