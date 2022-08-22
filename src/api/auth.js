@@ -1,5 +1,5 @@
 import axios from "./axios";
-const { REACT_APP_AUTH_TOKEN } = process.env;
+// const { REACT_APP_AUTH_TOKEN } = process.env;
 
 // import queryString from "querystring"
 export const login = async ({ grant_type, email, password }) => {
