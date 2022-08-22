@@ -7,5 +7,6 @@ import Maps from "./Maps/maps";
 import Places from "./Places/places";
 import Rating from "./rate/Rate";
 import RateNavBar from "./RateNav/RateNavBar";
+import RiderHistoryCard from "./RiderHistoryCard/RiderHistoryCard";
 
-export { Field, NavBar, Footer, Card, RNavBar, Maps, Places , Rating, RateNavBar };
+export { Field, NavBar, Footer, Card, RNavBar, Maps, Places , Rating, RateNavBar, RiderHistoryCard };
