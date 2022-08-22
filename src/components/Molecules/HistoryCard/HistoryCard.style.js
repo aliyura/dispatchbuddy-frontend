@@ -12,8 +12,14 @@ const HistoryCardStyle = styled.div`
   font-size: 1.33rem;
   .trip-info {
     display: flex;
-    width: 75%;
+    width: 80%;
     justify-content: space-between;
+  }
+  .trip-info p {
+    width: 20%;
+  }
+  .trip-info p:nth-child(1) {
+    width: 24%;
   }
   .rating-btn {
     width: 10%;

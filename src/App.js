@@ -11,11 +11,13 @@ import {
   ProfilePage,
   UpdatePasswordPage,
   EditProfilePage,
+  MyDeliveries,
   NotFound,
-  RidersLocation, RatingsPage } from "./pages";
+  RidersLocation, 
+  RatingsPage } from "./pages";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { AuthContext} from "./context/AuthProvider";
-import { MyDeliveries } from "./components";
+import { SelectRider } from "./components";
 
 function App() {
   const [, dispatch] = useContext(AuthContext);
@@ -43,11 +45,11 @@ function App() {
       <Route exact path="/" element={<Homepage />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/my_deliveries" element={<MyDeliveries />} />
       <Route path="/new-password" element={<CreateNewPassword />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/location" element={<RidersLocation />} />
       <Route path="/rate" element={<RatingsPage />} />
+      <Route path="/select-rider" element={<SelectRider />} />
       <Route
         path="/profile"
         element={
@@ -65,6 +67,14 @@ function App() {
         }
       />
       <Route
+        path="/my_deliveries"
+        element={
+          <ProtectedRoutes>
+            <MyDeliveries />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
         path="/change-password"
         element={
           <ProtectedRoutes>
@@ -73,7 +83,7 @@ function App() {
         }
       />       
     </Routes>
-  )
+  );
 }
 
 export default App

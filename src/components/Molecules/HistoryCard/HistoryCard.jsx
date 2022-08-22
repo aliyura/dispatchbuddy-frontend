@@ -5,10 +5,12 @@ function HistoryCard({delivery}) {
   return (
     <HistoryCardStyle>
       <div className="trip-info">
-        <p>{delivery?.name}</p>
-        <p>{delivery?.price}</p>
-        <p>{delivery?.weight}</p>
-        <p>{delivery?.location}</p>
+        <p>{delivery?.userName}</p>
+        {/* <p>{delivery?.price}</p> */}
+        <p>$ 3,500</p>
+        {/* <p>{delivery?.weight}</p> */}
+        <p>5kg</p>
+        <p>{delivery?.pickupLocation}</p>
       </div>
       <div className="rating-btn">
         <IconButton>Rate</IconButton>

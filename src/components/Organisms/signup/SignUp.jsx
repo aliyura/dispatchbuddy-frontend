@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useNavigate} from "react-router-dom";
 import { Button, Form, Logo } from "../../Atoms";
 import { Field } from "../../Molecules";
 import SignUpStyle from "./SignUp.style";
-import {NavLink} from 'react-router-dom';
+import { AuthContext } from "../../../context/AuthProvider";
+import { NavLink } from "react-router-dom";
 import { signup } from "../../../api";
 import swal from "sweetalert";
 
@@ -14,6 +15,7 @@ const initial = {
   password: "",
 };
 function SignUp() {
+  const [, dispatch] = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initial);
   const handleChange = (e) => {
@@ -29,11 +31,18 @@ function SignUp() {
     if (!formComplete) alert("All fields are required");
     else {
       const { data, error } = await signup(formData);
-      console.log(formData);
+      // console.log(formData);
+      // console.log(data.data);
+      const { email } = data?.data?.payload;
       if (data?.data?.success) {
         console.log(data);
+        dispatch({
+          type: "SIGNUP_SUCCESS",
+          payload: email,
+        });
+
         swal({
-          text: "Login was Successful",
+          text: "Signup was Successful",
           icon: "success",
           button: false,
           timer: 3000,
@@ -92,12 +101,14 @@ function SignUp() {
               formData={formData}
               handleChange={handleChange}
             />
-            <Button className='submit_btn' onClick={handleSubmit}>Sign Up</Button>
+            <Button className="submit_btn" onClick={handleSubmit}>
+              Sign Up
+            </Button>
           </Form>
           <p id="bottom">
-            Already have an account? 
-            <NavLink to="/login" className='login_link'>
-             Login
+            Already have an account?
+            <NavLink to="/login" className="login_link">
+              Login
             </NavLink>
           </p>
         </div>

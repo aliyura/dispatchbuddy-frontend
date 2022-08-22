@@ -6,6 +6,8 @@ import PlacesAutocomplete, {
 import { Form, Button } from "../../Atoms";
 import { Card } from "../../Molecules";
 import PlaceStyle from "./places.style";
+import swal from "sweetalert";
+
 export default function Places() {
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
@@ -24,7 +26,17 @@ export default function Places() {
   }
 
    console.log(coordinates.lat)
-   console.log(coordinates.lng)
+  console.log(coordinates.lng)
+  
+  const handleClick = () => {
+    if (address) {
+      swal("Successful!", `${address} has been added. `, "success", {
+        button: false,
+        timer: 3000,
+      });
+    }
+    setAddress("")
+  }
   return (
     
     <PlaceStyle>
@@ -53,7 +65,7 @@ export default function Places() {
                   </div>
                 );
               })}
-            <Button fill onClick={()=> setAddress("")}>Submit Location</Button>
+            <Button fill onClick={handleClick}>Submit Location</Button>
             </div>
           </div>
         )}

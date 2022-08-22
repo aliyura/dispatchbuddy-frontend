@@ -26,34 +26,40 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
-    if (!formComplete) alert("All fields are required");
+    // if (!formComplete) alert("All fields are required")
+        if (!formComplete){
+           swal("Failed!","Please enter a valid email and password" , "error", {
+          button: false,
+          timer: 3000,
+        });
+    }
     else {
-      const { data, error } = await login(formData);
-      if (data?.data?.success) {
+      // const { data, error } = await login(formData);
+      // if (data?.data?.success) {
         // setAuthToken(token)
-        dispatch({ type: "LOGIN_SUCCESS", payload: data?.data?.token });
+        // dispatch({ type: "LOGIN_SUCCESS", payload: data?.data?.token });
         swal({
           text: "Login was Successful",
           icon: "success",
           button: false,
           timer: 3000,
         });
-        return navigate("/profile");
-      } else if (!data?.data?.success) {
-        dispatch({
-          type: "LOGIN_FAILURE",
-          payload: data?.data?.message,
-        });
-        swal("Oops", data?.data?.message, "error", {
-          button: false,
-          timer: 3000,
-        });
-      } else {
-        swal("Oops", error, "error", {
-          button: false,
-          timer: 3000,
-        });
-      }
+        return navigate("/location");
+      // } else if (!data?.data?.success) {
+      //   dispatch({
+      //     type: "LOGIN_FAILURE",
+      //     payload: data?.data?.message,
+      //   });
+        // swal("Oops", data?.data?.message, "error", {
+        //   button: false,
+        //   timer: 3000,
+        // });
+      // } else {
+      //   swal("Oops", error, "error", {
+      //     button: false,
+      //     timer: 3000,
+      //   });
+      // }
     }
   };
 
