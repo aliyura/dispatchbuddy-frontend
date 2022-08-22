@@ -5,12 +5,35 @@ import HistoryCard from "../../Molecules/HistoryCard/HistoryCard";
 import MyDeliveriesStyle from "./MyDeliveries.style";
 import { getAllRequests } from "../../../api/auth";
 import { AuthContext } from "../../../context/AuthProvider";
-import { isToday, isYesterday,parseISO } from "date-fns/";
+import { isToday, isYesterday, parseISO } from "date-fns/";
+import Ratings from "../ratings/Ratings";
+
+// const SVGIcon = (props) => (
+//   <svg className={props.className} pointerEvents="none">
+//     <use xlinkHref={props.href} />
+//   </svg>
+// );
+// <Rating
+//   emptySymbol={<SVGIcon href={star} className="icon" />}
+//   fullSymbol={<SVGIcon href={starFull} className="icon" />}
+// />;
 
 function MyDeliveries() {
   const [, dispatch] = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [displayRating, setDisplayRating] = useState("true");
 
+   const handleRating = (value) => {
+     setRating(value);
+     console.log(value);
+     console.log(rating);
+   };
+  
+    const handleClose = () => {
+      setDisplayRating("");
+    };
+  
   useEffect(() => {
     dispatch({ type: "GET_DELIVERIES_START" });
 
@@ -50,6 +73,12 @@ function MyDeliveries() {
     <>
       <NavBar />
       <MyDeliveriesStyle>
+        {/* <Ratings
+          display={displayRating}
+          handleRating={handleRating}
+          handleClose={handleClose}
+          rating={rating}
+        /> */}
         <div className="banner">
           <h2>My Deliveries</h2>
         </div>

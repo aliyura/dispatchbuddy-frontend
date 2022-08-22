@@ -1,12 +1,39 @@
 import styled from "styled-components";
 
 const RatingsStyle = styled.div`
-//   width: 100vw;
-  min-height: 100vh;
-  padding-top: 2rem;
+ width: 50%;
+  min-height: 50vh;
+  padding: 2rem 0;
   font-size: 0.8rem;
-
-    
+  display: flex;
+  /* display: ${(props) => (props.display ? "flex" : "none")}; */
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+  .rating_header{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+    width: 100%;
+    text-align: center;
+    padding-bottom: .8rem;
+    margin-bottom: 2rem;
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    h1{
+      font-size: 1rem;
+    } 
+    svg{
+      /* width: 10%; */
+      position: absolute;
+      right: 2%;
+      bottom: 30%;
+      cursor: pointer;
+    }
+ }
+  /* justify-content: center; */
     .rate-container {
         display: flex;
         flex-direction: column;
