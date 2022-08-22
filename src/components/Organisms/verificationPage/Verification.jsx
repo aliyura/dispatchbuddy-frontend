@@ -36,11 +36,12 @@ function Verification() {
   }
   const [code, setCode] = useState("");
   async function handleSubmit() {
+        console.log(code);
+
     const { data, error } = await verify(username, code);
-    console.log(code);
     if (data?.data?.success) {
       swal({
-        text: "Login was Successful",
+        text: "Account verification was Successful",
         icon: "success",
         button: false,
         timer: 3000,
@@ -59,10 +60,10 @@ function Verification() {
       });
     }
   }
-  if (code.toString().length >= 4)
+  if (code.toString().length >= 6)
     setTimeout(() => {
       handleSubmit();
-    }, 5);
+    }, 3000);
   const handleChange = (code) => setCode(code);
   return (
     <LoginStyle>
@@ -79,7 +80,7 @@ function Verification() {
           <OtpInput
             value={code}
             onChange={handleChange}
-            numInputs={4}
+            numInputs={6}
             separator={<span style={{ width: ".8rem" }}></span>}
             isInputNum={true}
             shouldAutoFocus={true}

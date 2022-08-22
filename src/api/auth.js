@@ -25,7 +25,7 @@ export const login = async ({ grant_type, email, password }) => {
     const response = await axios.post("/oauth/token", params, {
       headers: {
         Authorization: basicAuth,
-        "Content-type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/x-www-form-urlencoded",
         // accept: "application/x-www-form-urlencoded",
       },
       // auth: {
@@ -79,12 +79,12 @@ export const signup = async ({
   }
 };
 
-export const verify = async ({ email = "emma@gmail.com", otp }) => {
+export const verify = async ({ username = "emma@gmail.com", otp }) => {
   try {
     const response = await axios.post(
       "api/user/verify",
       JSON.stringify({
-        username: email,
+        username,
         otp,
       }),
       {
