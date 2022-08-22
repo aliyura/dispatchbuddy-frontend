@@ -44,7 +44,7 @@ function Login() {
           button: false,
           timer: 3000,
         });
-        return navigate("/profile");
+        return navigate("/location");
       // } else if (!data?.data?.success) {
       //   dispatch({
       //     type: "LOGIN_FAILURE",
