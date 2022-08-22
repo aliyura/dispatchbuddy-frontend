@@ -7,6 +7,7 @@ import { Form, Button } from "../../Atoms";
 import { Card } from "../../Molecules";
 import PlaceStyle from "./places.style";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 export default function Places() {
   const [address, setAddress] = React.useState("");
@@ -14,6 +15,7 @@ export default function Places() {
     lat: null,
     lng: null
   });
+  const navigate = useNavigate();
   const handleChange = (address) => {
     setAddress(address)
     geocodeByAddress(address)
@@ -32,10 +34,16 @@ export default function Places() {
     if (address) {
       swal("Successful!", `${address} has been added. `, "success", {
         button: false,
-        timer: 3000,
+        timer: 2000,
+      });
+      setAddress("")
+      navigate('/my_deliveries')
+    }else {
+      swal("Error!", `Enter a valid address. `, "error", {
+        button: false,
+        timer: 2000,
       });
     }
-    setAddress("")
   }
   return (
     

@@ -27,7 +27,7 @@ function MyDeliveries() {
       }
     }
     loadDeliveries();
-  }, []);
+  }, [dispatch]);
   console.log(requests);
   let todaysRequests = requests?.filter(
     (request) =>

@@ -4,7 +4,7 @@ import { Button, Form, Logo } from "../../Atoms";
 import { Field } from "../../Molecules";
 import LoginStyle from "./Login.style";
 import { AuthContext } from "../../../context/AuthProvider";
-import { login } from "../../../api";
+// import { login } from "../../../api";
 import swal from "sweetalert";
 
 const initial = {
