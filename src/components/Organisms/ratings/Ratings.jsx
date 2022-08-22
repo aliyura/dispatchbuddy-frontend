@@ -7,7 +7,7 @@ import star from "../../../assets/icons/star.svg";
 import starFull from "../../../assets/icons/starFull.svg";
 import {ReactComponent as Close} from "../../../assets/icons/close.svg"
 function Ratings() {
-  let display = "true";
+  // let display = "true";
   let rating = 0;
   function handleClose() {
     

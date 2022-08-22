@@ -6,7 +6,7 @@ import MyDeliveriesStyle from "./MyDeliveries.style";
 import { getAllRequests } from "../../../api/auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { isToday, isYesterday, parseISO } from "date-fns/";
-import Ratings from "../ratings/Ratings";
+// import Ratings from "../ratings/Ratings";
 
 // const SVGIcon = (props) => (
 //   <svg className={props.className} pointerEvents="none">
@@ -21,18 +21,18 @@ import Ratings from "../ratings/Ratings";
 function MyDeliveries() {
   const [, dispatch] = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
-  const [rating, setRating] = useState(0);
-  const [displayRating, setDisplayRating] = useState("true");
+  // const [rating, setRating] = useState(0);
+  // const [displayRating, setDisplayRating] = useState("true");
 
-   const handleRating = (value) => {
-     setRating(value);
-     console.log(value);
-     console.log(rating);
-   };
+  //  const handleRating = (value) => {
+  //    setRating(value);
+  //    console.log(value);
+  //    console.log(rating);
+  //  };
   
-    const handleClose = () => {
-      setDisplayRating("");
-    };
+  //   const handleClose = () => {
+  //     setDisplayRating("");
+  //   };
   
   useEffect(() => {
     dispatch({ type: "GET_DELIVERIES_START" });
