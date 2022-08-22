@@ -90,11 +90,15 @@ function EditProfile() {
       <EditProfileStyle>
         <Logo />
         <div className="wrapper">
+          
+
+          <Form>
+          <div className="profile_header">
           <span className="back_btn" onClick={() => navigate(-1)}>
             &lt; Back
           </span>
-          <Form>
             <h1>Update Profile</h1>
+          </div>
             {/* <p id="createNewPassword-description">
                 Your new password must be different from previous password.
             </p> */}
