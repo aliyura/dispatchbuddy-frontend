@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const MyDeliveriesStyle = styled.main`
   width: 100%;
+  position: relative;
   h2 {
     font-size: 2.3rem;
     line-height: 2.79rem;

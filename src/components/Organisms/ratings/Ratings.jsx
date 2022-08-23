@@ -6,8 +6,9 @@ import Rating from "react-rating";
 import star from "../../../assets/icons/star.svg";
 import starFull from "../../../assets/icons/starFull.svg";
 import {ReactComponent as Close} from "../../../assets/icons/close.svg"
-function Ratings() {
+function Ratings({displayRating, onClose}) {
   // let display = "true";
+  console.log(displayRating);
   let rating = 0;
   function handleClose() {
     
@@ -16,12 +17,12 @@ function Ratings() {
     
   }
   return (
-    <PageStyle display>
-      <RatingsStyle>
+    <PageStyle display={displayRating}>
+      <RatingsStyle >
         {/* <RateNavBar /> */}
         <div className="rating_header">
           <h1>Rate and Review</h1>
-          <Close onClick={ handleClose} />
+          <Close onClick={onClose} />
         </div>
         <div className="rate-container">
           <h1>Do you enjoy the experience?</h1>

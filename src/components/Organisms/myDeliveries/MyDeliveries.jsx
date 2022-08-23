@@ -6,6 +6,7 @@ import MyDeliveriesStyle from "./MyDeliveries.style";
 import { getAllRequests } from "../../../api/auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { isToday, isYesterday, parseISO } from "date-fns/";
+import Ratings from "../ratings/Ratings";
 // import Ratings from "../ratings/Ratings";
 
 // const SVGIcon = (props) => (
@@ -22,17 +23,17 @@ function MyDeliveries() {
   const [, dispatch] = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   // const [rating, setRating] = useState(0);
-  // const [displayRating, setDisplayRating] = useState("true");
+  const [displayRating, setDisplayRating] = useState("none");
 
   //  const handleRating = (value) => {
   //    setRating(value);
   //    console.log(value);
   //    console.log(rating);
   //  };
-  
-  //   const handleClose = () => {
-  //     setDisplayRating("");
-  //   };
+   
+  const showModal = () => {
+    setDisplayRating("block");
+  }
   
   useEffect(() => {
     dispatch({ type: "GET_DELIVERIES_START" });
@@ -83,11 +84,19 @@ function MyDeliveries() {
           <h2>My Deliveries</h2>
         </div>
         <PageStyle id="deliveries">
+          <Ratings
+            onClose={() => setDisplayRating("none")}
+            displayRating={displayRating}
+          />
           {todaysRequests?.length >= 1 && (
             <div className="today">
               <h5>Today</h5>
               {todaysRequests?.map((request, index) => (
-                <HistoryCard delivery={request} key={index} />
+                <HistoryCard
+                  onShow={showModal}
+                  delivery={request}
+                  key={index}
+                />
               ))}
             </div>
           )}
@@ -95,7 +104,11 @@ function MyDeliveries() {
             <div className="yesterday">
               <h5>Yesterday</h5>
               {yesterdaysRequests?.map((request, index) => (
-                <HistoryCard delivery={request} key={index} />
+                <HistoryCard
+                  onShow={showModal}
+                  delivery={request}
+                  key={index}
+                />
               ))}
             </div>
           )}
@@ -103,7 +116,11 @@ function MyDeliveries() {
             <div className="previous">
               <h5>Older requests</h5>
               {others?.map((request, index) => (
-                <HistoryCard delivery={request} key={index} />
+                <HistoryCard
+                  onShow={showModal}
+                  delivery={request}
+                  key={index}
+                />
               ))}
             </div>
           )}
