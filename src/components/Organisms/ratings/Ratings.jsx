@@ -10,9 +10,9 @@ function Ratings({displayRating, onClose}) {
   // let display = "true";
   console.log(displayRating);
   let rating = 0;
-  function handleClose() {
+  // function handleClose() {
     
-  } 
+  // } 
   function handleRating() {
     
   }

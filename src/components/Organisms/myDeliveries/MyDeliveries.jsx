@@ -74,12 +74,6 @@ function MyDeliveries() {
     <>
       <NavBar />
       <MyDeliveriesStyle>
-        {/* <Ratings
-          display={displayRating}
-          handleRating={handleRating}
-          handleClose={handleClose}
-          rating={rating}
-        /> */}
         <div className="banner">
           <h2>My Deliveries</h2>
         </div>
