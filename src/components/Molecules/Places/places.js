@@ -61,7 +61,7 @@ export default function Places() {
               <Form className="form-style">
               <input {...getInputProps({placeholder: 'Search Places ...',
                 className: 'location-search-input'})}  />               
-              <h2>Result</h2>
+              {address && <h2>Result</h2>}
               </Form>
               
             </div>
@@ -73,7 +73,7 @@ export default function Places() {
                   </div>
                 );
               })}
-            <Button fill onClick={handleClick}>Submit Location</Button>
+            <Button className="btn-submit" fill onClick={handleClick}>Submit Location</Button>
             </div>
           </div>
         )}

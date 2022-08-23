@@ -11,6 +11,16 @@ const PlaceStyle = styled.div`
     padding: 0;
     font-size: 1rem;
   }
+  .form-style{
+    input{
+      padding: 0.5rem 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+    // border: 1px solid red;
+  }
+  .btn-submit{
+    cursor: pointer;
+  }
 `;
 
 export default PlaceStyle;
