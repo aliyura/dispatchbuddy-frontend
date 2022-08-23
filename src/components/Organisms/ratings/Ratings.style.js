@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 const RatingsStyle = styled.div`
-${(props)=>console.log(props.display)}
- width: 50%;
-  min-height: 50vh;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
   padding: 2rem 0;
   font-size: 0.8rem;
-  /* display: flex; */
-  display: ${(props) => props.display};
+  display: block;
   flex-direction: column;
-  margin: auto;
+  background: #fff;
   align-items: center;
   border-radius: 20px;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
@@ -21,12 +19,9 @@ ${(props)=>console.log(props.display)}
     padding-bottom: .8rem;
     margin-bottom: 2rem;
     position: relative;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     h1{
       font-size: 1rem;
-    } 
+    }
     svg{
       /* width: 10%; */
       position: absolute;
@@ -62,9 +57,9 @@ ${(props)=>console.log(props.display)}
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
-            align-items: center;   
+            align-items: center;
         }
-    }   
+    }
 
     @media (max-width: 500px) {
       width: 80%;
