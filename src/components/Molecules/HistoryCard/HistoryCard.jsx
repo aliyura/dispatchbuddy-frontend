@@ -1,7 +1,7 @@
 import React from 'react'
 import IconButton from '../IconButton/IconButton';
 import HistoryCardStyle from './HistoryCard.style';
-function HistoryCard({delivery}) {
+function HistoryCard({delivery, onShow}) {
   return (
     <HistoryCardStyle>
       <div className="trip-info">
@@ -12,7 +12,7 @@ function HistoryCard({delivery}) {
         <p>5kg</p>
         <p>{delivery?.pickupLocation}</p>
       </div>
-      <div className="rating-btn">
+      <div className="rating-btn" onClick={onShow}>
         <IconButton>Rate</IconButton>
       </div>
     </HistoryCardStyle>

@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
 const RatingsStyle = styled.div`
+${(props)=>console.log(props.display)}
  width: 50%;
   min-height: 50vh;
   padding: 2rem 0;
   font-size: 0.8rem;
-  display: flex;
-  /* display: ${(props) => (props.display ? "flex" : "none")}; */
+  /* display: flex; */
+  display: ${(props) => props.display};
   flex-direction: column;
   margin: auto;
   align-items: center;
   border-radius: 20px;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+  position: absolute;
   .rating_header{
     border-bottom: 1px solid rgba(0, 0, 0, 0.24);
     width: 100%;

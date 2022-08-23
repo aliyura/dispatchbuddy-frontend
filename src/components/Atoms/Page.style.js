@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const PageStyle = styled.div`
+  display: ${(props) => props.display || "block"};
+
   margin-top: 8.4rem;
   width: 100vw;
   min-height: 100vh;
