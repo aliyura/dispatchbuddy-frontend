@@ -6,33 +6,31 @@ import MyDeliveriesStyle from "./MyDeliveries.style";
 import { getAllRequests } from "../../../api/auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { isToday, isYesterday, parseISO } from "date-fns/";
-import Ratings from "../ratings/Ratings";
-// import Ratings from "../ratings/Ratings";
+import Modal from "react-modal";
 
-// const SVGIcon = (props) => (
-//   <svg className={props.className} pointerEvents="none">
-//     <use xlinkHref={props.href} />
-//   </svg>
-// );
-// <Rating
-//   emptySymbol={<SVGIcon href={star} className="icon" />}
-//   fullSymbol={<SVGIcon href={starFull} className="icon" />}
-// />;
+import Ratings from "../ratings/Ratings";
+
+
+Modal.setAppElement("#root");
+
+
 
 function MyDeliveries() {
   const [, dispatch] = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
-  // const [rating, setRating] = useState(0);
-  const [displayRating, setDisplayRating] = useState("none");
+  const [rating, setRating] = useState(0);
 
-  //  const handleRating = (value) => {
-  //    setRating(value);
-  //    console.log(value);
-  //    console.log(rating);
-  //  };
-   
-  const showModal = () => {
-    setDisplayRating("block");
+   const handleRating = (value) => {
+     setRating(value);
+     console.log(value);
+   };
+   console.log(rating)
+
+    const [isOpen, setIsOpen] = useState(false);
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+    setRating(0);
   }
   
   useEffect(() => {
@@ -78,16 +76,26 @@ function MyDeliveries() {
           <h2>My Deliveries</h2>
         </div>
         <PageStyle id="deliveries">
-          <Ratings
-            onClose={() => setDisplayRating("none")}
-            displayRating={displayRating}
-          />
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+            className="mymodal"
+            overlayClassName="myoverlay"
+            closeTimeoutMS={500}
+          >
+            <Ratings
+              rating={rating}
+              handleRating={handleRating}
+              toggleModal={toggleModal}
+            />
+          </Modal>
           {todaysRequests?.length >= 1 && (
             <div className="today">
               <h5>Today</h5>
               {todaysRequests?.map((request, index) => (
                 <HistoryCard
-                  onShow={showModal}
+                  onShow={toggleModal}
                   delivery={request}
                   key={index}
                 />
@@ -99,7 +107,7 @@ function MyDeliveries() {
               <h5>Yesterday</h5>
               {yesterdaysRequests?.map((request, index) => (
                 <HistoryCard
-                  onShow={showModal}
+                  onShow={toggleModal}
                   delivery={request}
                   key={index}
                 />
@@ -111,7 +119,7 @@ function MyDeliveries() {
               <h5>Older requests</h5>
               {others?.map((request, index) => (
                 <HistoryCard
-                  onShow={showModal}
+                  onShow={toggleModal}
                   delivery={request}
                   key={index}
                 />

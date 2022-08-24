@@ -24,9 +24,10 @@ const MyDeliveriesStyle = styled.main`
       margin: 5rem 0 2rem;
       font-size: 1.33rem;
     }
-    .today h5{
+    .today h5 {
       margin-top: 0;
     }
+    
   }
 `;
 
