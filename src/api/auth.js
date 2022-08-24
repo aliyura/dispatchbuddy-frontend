@@ -256,3 +256,34 @@ export const getAllRequests = async (
     };
   }
 };
+
+export const getAllRiders = async (
+  page=0, pickup="Ajah", destination="Ikeja"
+ ) => {
+   console.log(page)
+   const params = { 
+    page,
+    pickup,
+    destination
+   }
+   try {
+     const {data} = await axios.get(
+       `api/rider/search`, {params},
+       {
+         headers: { "Content-type": "x-www-form-urlencoded" },
+         
+       }
+     );
+     console.log({data})
+     return {
+       data: data.payload.content,
+       error: null,
+     };
+   } catch (err) {
+     return {
+       data: null,
+       error: err,
+     };
+   }
+ };
+ 

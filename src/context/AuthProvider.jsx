@@ -85,7 +85,28 @@ const AppReducer = (state, action) => {
         loadingDeliveries: false,
         loadingDeliveriesError: action.payload,
       };
-    default:
+    
+    // SELECT RIDER
+    case "GET_RIDER_START":
+      return {
+        ...state,
+        loadingRider: true,
+      };
+    case "GET_RIDER_SUCCESS":
+      return {
+        ...state,
+        loadingRider: false,
+        loadingRiderError: null,
+        rider: action.payload,
+      };
+    case "GET_RIDER_ERROR":
+      return {
+        ...state,
+        loadingRider: false,
+        loadingRiderError: action.payload,
+      };
+    
+      default:
       return state;
   }
 };
