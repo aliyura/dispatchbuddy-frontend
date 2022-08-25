@@ -18,7 +18,7 @@ const SelectRiderStyle = styled.main`
     color: #FFFFFF;
     padding: 3.58rem 0 3.58rem 0;
     background: url(.png), rgba(16, 24, 40, 0.05);
-    border: 1px solid #580aff;
+    border: 1px solid;
     border-radius: 16px;
     margin-top: 10rem;
     margin-right: 16.53rem;
