@@ -2,6 +2,7 @@ import React from 'react'
 import RiderHistoryCardStyle from './RiderHistoryCard.style';
 import profiles from '../../../assets/images/profile.png';
 import { Button } from "../../Atoms";
+import { format } from "date-fns/";
 
 function RiderHistoryCard({rider}) {
   return (
@@ -9,17 +10,17 @@ function RiderHistoryCard({rider}) {
       <div className="rider-info">
         <div className="rider-info_left">
           <div className="rider-info_img">
-            <img  className="rider-info_image" src={profiles} alt="Profile" />
+            <img height="90px" width="90px" className="rider-info_image" src={profiles} alt="Profile" />
           </div>
           <div className="rider-info_details">
-            <p>{rider?.name}</p>
-            <p>{rider?.location}</p>
+            <p className="rider-info-name">{rider?.name}</p>
+            <p>{rider?.coveredLocations?.filter(v => v === "Ikeja")[0]}</p>
             <p>{rider?.phoneNumber}</p>
           </div>
         </div>
         <div className="rider-info_right">
-          <p>{rider?.date}</p>  
-          <Button>{rider?.contactRider}</Button>
+          <p>Joined, {rider?.createdDate ? format(new Date(rider?.createdDate ), "yyyy-MM-dd") : "N/A"}</p>  
+          <Button>Contact Rider</Button>
         </div>
       </div>
     </RiderHistoryCardStyle>

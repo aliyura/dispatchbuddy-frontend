@@ -5,15 +5,16 @@ const RiderHistoryCardStyle = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  height: 6rem;
+  
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
   margin-bottom: 2.66rem;
-  padding: 0 3.3rem;
+  padding: 1.5rem 2.8rem;
   font-size: 1.33rem;
   .rider-info {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
   }
   .rider-info_left {
     display: flex;
@@ -23,7 +24,15 @@ const RiderHistoryCardStyle = styled.div`
   .rider-info_details {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin-left: 1rem;
+    .rider-info-name  {
+      font-weight: bold
+    }
+    p {
+      margin-top: 10px;
+    }
   }
   .rider-info_img {
     border-radius: 50%;
@@ -38,6 +47,8 @@ const RiderHistoryCardStyle = styled.div`
   .rider-info_right {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
