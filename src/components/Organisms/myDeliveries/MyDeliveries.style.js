@@ -16,7 +16,7 @@ const MyDeliveriesStyle = styled.main`
     color: #580aff;
     padding: 3.58rem 0 3.58rem 16.53rem;
     background: rgba(88, 10, 255, 0.1);
-    border: 1px solid #580aff;
+    // border: 1px solid #580aff;
     margin-top: 7.6rem;
   }
   #deliveries {
