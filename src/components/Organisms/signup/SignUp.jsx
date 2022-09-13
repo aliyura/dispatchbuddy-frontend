@@ -29,7 +29,10 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formComplete) alert("All fields are required");
+    if (!formComplete) swal("Oops", 'All fields are required', "error", {
+      button: false,
+      timer: 3000,
+    });
     else {
       //TODO Validation of form here.
       if(formData.dateOfBirth) formData.dateOfBirth = formData.dateOfBirth.replace(/-/g, '/');
