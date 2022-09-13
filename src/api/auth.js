@@ -2,7 +2,6 @@ import axios from "axios";
 import qs from 'qs';
 
 export const login = async ({ grant_type, email, password }) => {
-  // loadUser();
   try {
      const basicAuth = "Basic " + window.btoa("web-client:password");
      let data = qs.stringify({
@@ -358,22 +357,13 @@ export const getAllRequests = async (
 export const getAllRiders = async (
   page=0, pickup="Ajah", destination="Ikeja"
  ) => {
-   console.log(page)
-  //  const params = { 
-  //   page,
-  //   pickup,
-  //   destination
-  //  }
-  // console.log(process.env.REACT_APP_BASE_LOGIN_URL, 'base URL');
    try {
     let config = {
       method: 'get',
-      url: `${process.env.REACT_APP_BASE_LOGIN_URL}/api/rider/search?page=${page}&pickup=${pickup}&destination=${destination}`,
+      url: `${process.env.REACT_APP_BACKEND_URL}/rider/search?page=${page}&pickup=${pickup}&destination=${destination}`,
       headers: { }
     };
     
-    
-    // meant to return here...
     return axios(config)
      .then( (response) => {
        console.log(response, 'respond....');
@@ -387,18 +377,6 @@ export const getAllRiders = async (
       }
      });
 
-    //  const {data} = await axios.get(
-    //    `api/rider/search`, {params},
-    //    {
-    //      headers: { "Content-type": "x-www-form-urlencoded" },
-         
-    //    }
-    //  );
-    //  console.log({data})
-    //  return {
-    //    data: data.payload.content,
-    //    error: null,
-    //  };
    } catch (err) {
      return {
        data: null,

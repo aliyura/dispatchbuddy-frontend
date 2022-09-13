@@ -75,7 +75,7 @@ export default function Places({onChange, onSelect, address, handleSetAddress, l
                   {locations.map((item, idx) => 
                     <div key={idx} className="box">
                       <span>{item}</span>
-                      <span onClick={removeHandler(idx)} className="closer">X</span>
+                      {/* <span onClick={removeHandler(idx)} className="closer">X</span> */}
                     </div>
                   )}
                   

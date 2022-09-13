@@ -1,17 +1,23 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import PlacesAutocomplete from "react-places-autocomplete";
-import PlaceStyle from "../../Molecules/Places/places.style";
-import { Button, Form, Image, PageStyle, } from "../../Atoms";
-import { Field, Footer, NavBar } from "../../Molecules";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+
+import { Button, Form, Image, PageStyle, FieldLandingStyle, PlaceLandingStyle } from "../../Atoms";
+import { Footer, NavBar } from "../../Molecules";
 import HomepageStyle from "./Homepage.style";
 import Image1 from "../../../assets/images/image1.png";
 import Location from "../../../assets/icons/location.svg";
-import { useAuth } from "../../../context/AuthProvider";
+import { AuthContext, useAuth } from "../../../context/AuthProvider";
 import { Card } from "../../Molecules";
+import { getAllRiders } from "../../../api/auth";
 
 function Homepage() {
   const [{isAuthenticated}] = useAuth();
+  const [, dispatch] = useContext(AuthContext);
+  const navigate = useNavigate();
+
   console.log(isAuthenticated, 'state at Landing Page');
 
 const [pickUpAddress, setPickUpAddress] = useState("");
@@ -43,10 +49,9 @@ const handlePickUpSelect = async () => {
       console.log(results, 'results....')
       const latLng = await getLatLng(results[0]);
       if(latLng){
-          console.log(results[0].address_components[0].short_name, 'String address chosen');
-          // setCoordinates(latLng)
-          // const mapped = {[`${results[0].address_components[0].short_name}`]: latLng};
-          setPickUpLocations([...pickUpLocations].concat(`${results[0].address_components[0].short_name}`));
+        console.log(results[0].address_components[0].short_name, 'String address chosen');
+        // setCoordinates(latLng)
+        setPickUpLocations([...pickUpLocations].concat(`${results[0].address_components[0].short_name}`));
       }
   } catch (error) {
       //show error on page.
@@ -71,32 +76,52 @@ const handleDeliverySelect = async () => {
     }
 }
 
-  // const [address, setAddress] = useState("");
-  // const [locations, setLocations] = useState([]);
+const handleClick = async (e) => {
+  e.preventDefault();
 
-  // const handleChange = (address) => {
-  //   try {
-  //     setAddress(address)
-  //   } catch (error) {
-  //     console.log('Error', error);
-  //   }  
-  // }
-    
-  // const handleSelect = async () => {
-  //   try {
-  //       const results = await geocodeByAddress(address);
-  //       console.log(results, 'results....')
-  //       const latLng = await getLatLng(results[0]);
-  //       if(latLng){
-  //         console.log(results[0].address_components[0].short_name, 'String address chosen');
-  //         // setCoordinates(latLng)
-  //         setLocations([...locations].concat(`${results[0].address_components[0].short_name}`));
-  //       }
-  //   } catch (error) {
-  //     //show error on page.
-  //     console.log('Error', error);
-  //   }
-  // }
+  const fieldComplete = pickUpLocations.length <= 0 && deliveryLocations.length <= 0;
+  if(fieldComplete){
+    swal("Oops", 'All fields are required', "error", {
+      button: false,
+      timer: 3000,
+    });
+  }else {
+    //Submit data to look for rider in that area.
+    // GET_RIDER_START
+    const response = await getAllRiders(0, pickUpLocations[0], deliveryLocations[0]);
+
+    if (response?.data?.success) {
+        dispatch({ type: "GET_RIDER_SUCCESS", payload: response?.data?.content });
+        //Persist the data to localstorage for select riders route.
+        localStorage.setItem('pickup', pickUpLocations[0]);
+        localStorage.setItem('destination', deliveryLocations[0]);
+
+        swal({
+          text: "Rider Details Retrieved Successfully",
+          icon: "success",
+          button: false,
+          timer: 3000,
+        });
+        return navigate("/select-rider");
+      }else if (!response?.data?.success) {
+        dispatch({ type: "GET_RIDER_ERROR", payload: response?.error });
+        setPickUpLocations([]);
+        setDeliveryLocations([]);
+        swal("Oops", response?.data?.message, "error", {
+          button: false,
+          timer: 3000,
+        });
+      } else {
+        dispatch({ type: "GET_RIDER_ERROR", payload: response?.error });
+        setPickUpLocations([]);
+        setDeliveryLocations([]);
+        swal("Oops", response?.data?.message, "error", {
+          button: false,
+          timer: 3000,
+        });
+      }
+  }
+}
 
   return (
     <>
@@ -130,41 +155,7 @@ const handleDeliverySelect = async () => {
             </div>
             <div className="locator">
               <Form locator>
-                <Field
-                  label="Pick Up"
-                  placeholder="Enter pick up location"
-                  type="text"
-                  icon={Location}
-                />
-                {/* 
-                <Field
-                  label="Delivery Destination"
-                  placeholder="Enter delivery destination"
-                  type="text"
-                  icon={Location}
-                />
-                
-                <FieldStyle>
-                  <label className="label">{label}</label>
-                  <div className="input-wrapper">
-                    {icon && (
-                      <div className="icon">
-                        <Image src={icon} alt={`${label}'s icon`} />
-                      </div>
-                    )}
-                    <Input
-                      type={type}
-                      placeholder={placeholder}
-                      className={className}
-                      name={name}
-                      value={value}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </FieldStyle>
-                */}
-
-                <PlaceStyle>
+                <PlaceLandingStyle>
                   <PlacesAutocomplete
                     value={pickUpAddress}
                     onChange={handlePickUpChange}
@@ -176,15 +167,22 @@ const handleDeliverySelect = async () => {
                         <div className="forms">
                           {/* <h1>Select locations to cover</h1> */}
                           <Form className="form-style">
-                          <input {...getInputProps({placeholder: 'Enter pick up location',
+                          <FieldLandingStyle>
+                            <label className="label">Pick Up</label>
+                            <div className="input-wrapper">
+                            <div className="icon">
+                              <Image src={Location} alt={`${'Pick Up'}'s icon`} />
+                            </div>
+                            <input {...getInputProps({placeholder: 'Enter pick up location',
                             className: 'location-search-input'})}  />
+                            </div>
+                          </FieldLandingStyle>
                             {/* Use array length checker */}
                           {pickUpLocations.length > 0 && 
                             <div className="box-wrapper">
                               {pickUpLocations.map((item, idx) => 
                                 <div key={idx} className="box">
                                   <span>{item}</span>
-                                  {/* <span onClick={removeHandler(idx)} className="closer">X</span> */}
                                 </div>
                               )}
                               
@@ -200,7 +198,7 @@ const handleDeliverySelect = async () => {
                               </div>
                             );
                           })}
-                        {/* <Button className="btn-submit" fill onClick={handleClick}>Submit Location</Button> */}
+
                         </div>
                       </div>
                     )}
@@ -214,17 +212,24 @@ const handleDeliverySelect = async () => {
                     {({ getInputProps, suggestions, getSuggestionItemProps }) => (
                       <div>
                         <div className="forms">
-                          {/* <h1>Select locations to cover</h1> */}
                           <Form className="form-style">
+                          <FieldLandingStyle>
+                            <label className="label">Delivery Destination</label>
+                            <div className="input-wrapper">
+                            <div className="icon">
+                              <Image src={Location} alt={`${'Delivery Destination'}'s icon`} />
+                            </div>
+
                           <input {...getInputProps({placeholder: 'Enter delivery destination',
                             className: 'location-search-input'})}  />
+                            </div>
+                            </FieldLandingStyle>
                             {/* Use array length checker */}
                           {deliveryLocations.length > 0 && 
                             <div className="box-wrapper">
                               {deliveryLocations.map((item, idx) => 
                                 <div key={idx} className="box">
                                   <span>{item}</span>
-                                  {/* <span onClick={removeHandler(idx)} className="closer">X</span> */}
                                 </div>
                               )}
                               
@@ -240,14 +245,13 @@ const handleDeliverySelect = async () => {
                               </div>
                             );
                           })}
-                        {/* <Button className="btn-submit" fill onClick={handleClick}>Submit Location</Button> */}
                         </div>
                       </div>
                     )}
                   </PlacesAutocomplete>
-                </PlaceStyle>
+                </PlaceLandingStyle>
 
-                <Button fill type="button">Find riders</Button>
+                <Button fill type="button" onClick={handleClick}>Find riders</Button>
               </Form>
             </div>
           </section>
