@@ -9,24 +9,19 @@ import { isToday, isYesterday, parseISO } from "date-fns/";
 import Modal from "react-modal";
 
 import Ratings from "../ratings/Ratings";
-
-
 Modal.setAppElement("#root");
-
-
 
 function MyDeliveries() {
   const [, dispatch] = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   const [rating, setRating] = useState(0);
 
-   const handleRating = (value) => {
-     setRating(value);
-     console.log(value);
-   };
-   console.log(rating)
+  const handleRating = (value) => {
+    setRating(value);
+    console.log(value);
+  };
 
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
     setIsOpen(!isOpen);
@@ -37,20 +32,21 @@ function MyDeliveries() {
     dispatch({ type: "GET_DELIVERIES_START" });
 
     async function loadDeliveries() {
-      const { data, error } = await getAllRequests(
-        0,
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiVVNFUiIsImdlbmRlciI6Ik1hbGUiLCJjaXR5IjoiQWJ1amEiLCJ1c2VyX25hbWUiOiJuZXQucmFiaXVhbGl5dUBnbWFpbC5jb20iLCJhY2NvdW50VHlwZSI6IkRJU1BBVENIRVIiLCJkcCI6ImRwNjQwNDhmMzYwOTkuanBnIiwidXVpZCI6IjY0MDQ4ZjM2MDk5IiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJjbGllbnRfaWQiOiJ3ZWItY2xpZW50IiwicGhvbmVOdW1iZXIiOiIwODA2NDE2MDIwNCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJpc0VuYWJsZWQiOnRydWUsIm5hbWUiOiJSYWJpdSBBbGl5dSIsImlkIjoiNjJkYTYxOTE0YTBhZDQwZGU3NzU0NDU0IiwianRpIjoiNDQ4NmU4MDEtMzNmYy00ODFkLWI3MmQtOGVmMjJjYWRhZGYxIiwiZW1haWwiOiJuZXQucmFiaXVhbGl5dUBnbWFpbC5jb20iLCJzdGF0dXMiOiJBQyJ9._-T8leEXhKsUhZrSlA10nSFoUKD0Cjoz9PVnjsaxiNI"
-      );
-      if (data) {
-        setRequests(data);
-        dispatch({ type: "GET_DELIVERIES_SUCCESS", payload: data });
+      const apiResponse = await getAllRequests(0);
+      if (apiResponse?.data?.success) {
+        setRequests(apiResponse?.data?.payload?.content);
+        dispatch({ type: "GET_DELIVERIES_SUCCESS", payload: apiResponse?.data?.payload?.content });
+      }else if(!apiResponse?.data?.success){
+        dispatch({ type: "GET_DELIVERIES_ERROR", payload: apiResponse?.error });
       } else {
-        dispatch({ type: "GET_DELIVERIES_ERROR", payload: error });
+        dispatch({ type: "GET_DELIVERIES_ERROR", payload: apiResponse?.error });
       }
     }
     loadDeliveries();
   }, [dispatch]);
+
   console.log(requests);
+  
   let todaysRequests = requests?.filter(
     (request) =>
       isToday(parseISO(request?.lastModifiedDate)) === true ||
@@ -90,7 +86,7 @@ function MyDeliveries() {
               toggleModal={toggleModal}
             />
           </Modal>
-          {todaysRequests?.length >= 1 && (
+          {todaysRequests?.length >= 1 ? (
             <div className="today">
               <h5>Today</h5>
               {todaysRequests?.map((request, index) => (
@@ -101,8 +97,15 @@ function MyDeliveries() {
                 />
               ))}
             </div>
+          ): (
+            <>
+            <div className="today">
+              <h5>Today</h5>
+              You dont have any Requests today
+            </div>
+            </>
           )}
-          {yesterdaysRequests?.length >= 1 && (
+          {yesterdaysRequests?.length >= 1 ? (
             <div className="yesterday">
               <h5>Yesterday</h5>
               {yesterdaysRequests?.map((request, index) => (
@@ -113,8 +116,15 @@ function MyDeliveries() {
                 />
               ))}
             </div>
+          ): (
+            <>
+            <div className="yesterday">
+              <h5>Yesterday</h5>
+              You didn't have any Requests yesterday
+            </div>
+            </>
           )}
-          {others?.length >= 1 && (
+          {others?.length >= 1 ? (
             <div className="previous">
               <h5>Older requests</h5>
               {others?.map((request, index) => (
@@ -125,7 +135,14 @@ function MyDeliveries() {
                 />
               ))}
             </div>
-          )}
+          ) : (
+            <>
+            <div className="previous">
+              <h5>Older requests</h5>
+              You have not any Requests Previously
+            </div>
+            </>
+          ) }
         </PageStyle>
       </MyDeliveriesStyle>
     </>

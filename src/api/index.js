@@ -1,3 +1,3 @@
-import { login, signup, verify, validate, reset, updateProfile } from "./auth";
+import { login, signup, verify, validate, reset, updateProfile, getProfile, updatePassword } from "./auth";
 
-export { login, signup, verify, validate, reset, updateProfile};
+export { login, signup, verify, validate, reset, updateProfile, getProfile, updatePassword};

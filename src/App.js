@@ -16,23 +16,25 @@ import {
   RidersLocation, 
   RatingsPage } from "./pages";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
-import { AuthContext} from "./context/AuthProvider";
+import { AuthContext, AuthProvider } from "./context/AuthProvider";
 import { SelectRider } from "./components";
 
 function App() {
-  const [, dispatch] = useContext(AuthContext);
+  // const [state, dispatch] = useContext(AuthContext);
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    dispatch({ type: "LOAD_USER" });
-  }, [dispatch]);
+  //   dispatch({ type: "LOAD_USER" });
+  // }, [dispatch]);
+
   return (
+    <AuthProvider>
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route
         path="*"
         element={
-          localStorage.getItem(process.env.REACT_APP_AUTH_TOKEN) ? (
+          localStorage.getItem('token') ? (
             <>
               <NotFound />
             </>
@@ -47,7 +49,11 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/new-password" element={<CreateNewPassword />} />
       <Route path="/verification" element={<Verification />} />
-      <Route path="/location" element={<RidersLocation />} />
+      <Route path="/location" element={
+        <ProtectedRoutes>
+          <RidersLocation />
+        </ProtectedRoutes>
+      } />
       <Route path="/rate" element={<RatingsPage />} />
       <Route path="/select-rider" element={<SelectRider />} />
       <Route
@@ -83,6 +89,7 @@ function App() {
         }
       />       
     </Routes>
+    </AuthProvider>
   );
 }
 

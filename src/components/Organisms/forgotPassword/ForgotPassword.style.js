@@ -11,10 +11,21 @@ const ForgotPasswordStyle = styled.div`
     background-color: #fff;
     margin: auto;
     padding: 2.9rem 0;
+    .header-text-wrap{
+      // border: 1px solid yellow;
+      width: 55%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      .back{
+        cursor: pointer;
+        color: #580AFF;
+      }
+    }
 
     h1 {
-      width: 44%;
-      margin: auto;
+      // width: 44%;
+      // margin: auto;
       font-size: 1.13rem;
     }
     #bottom {

@@ -1,4 +1,4 @@
 const setAuthToken = (token) => {
-  localStorage.setItem("token", JSON.stringify({ token }));
+  localStorage.setItem("token", token);
 };
 export default setAuthToken

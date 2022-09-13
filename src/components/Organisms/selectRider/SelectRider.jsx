@@ -8,24 +8,28 @@ import SelectRiderStyle from "./SelectRider.style";
 function SelectRider() {
     const [, dispatch] = useContext(AuthContext);
     const [requests, setRequests] = useState([]);
-getAllRiders()
+
     useEffect(() => {
         dispatch({ type: "GET_RIDER_START" });
     
         async function loadRiders() {
-          const { data, error } = await getAllRiders(
-            0
-          );
-          if (data) {
-            setRequests(data);
-            dispatch({ type: "GET_RIDER_SUCCESS", payload: data });
+          // const { data, error } = await getAllRiders(
+          //   0
+          // );
+          const result = await getAllRiders(0);
+          console.log(result, 'result from api get All riders....');
+          if (result) {
+            setRequests(result?.data?.payload?.content);
+            dispatch({ type: "GET_RIDER_SUCCESS", payload: result?.payload });
           } else {
-            dispatch({ type: "GET_RIDER_ERROR", payload: error });
+            dispatch({ type: "GET_RIDER_ERROR", payload: result.message });
           }
         }
+        console.log('inside useEffect for loading Riders....');
         loadRiders()
+        getAllRiders()
       }, [dispatch]);
-      console.log({requests});
+      console.log({requests}, 'requests...stuffs');
     return (
     <>
       <NavBar />

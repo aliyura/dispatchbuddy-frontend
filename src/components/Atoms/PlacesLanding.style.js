@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PlaceStyle = styled.div`
+const PlaceLandingStyle = styled.div`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
   padding: 0 2em;
   h1 {
@@ -9,7 +9,7 @@ const PlaceStyle = styled.div`
   .forms {
     width: 100%;
     padding-top: 2rem;
-    // border: 2px solid red;
+    border: 2px solid red;
     font-size: 0.8rem;
     h1 {
       font-size: 2rem;
@@ -70,4 +70,4 @@ const PlaceStyle = styled.div`
   }
 `;
 
-export default PlaceStyle;
+export default PlaceLandingStyle;

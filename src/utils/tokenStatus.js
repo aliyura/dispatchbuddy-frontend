@@ -3,8 +3,8 @@ import moment from "moment";
 
 const { REACT_APP_AUTH_TOKEN } = process.env;
 
-const tokenStatus = (token) => {
-  // const token = localStorage.getItem(REACT_APP_AUTH_TOKEN);
+const tokenStatus = () => {
+  const token = localStorage.getItem(REACT_APP_AUTH_TOKEN);
   if (token) {
     const decoded =  jwt_decode(token);
     const currDate = +moment().format("X");

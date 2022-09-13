@@ -33,6 +33,10 @@ const LoginStyle = styled.div`
     #bottom {
       text-align: center;
       color:#21334F;
+
+      span{
+        cursor: pointer;
+      }
       
       span, .create_account_link {
         margin-left: 8px;

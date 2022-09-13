@@ -5,7 +5,7 @@ function RidersLocation() {
   return (
     <>
       <NavBar />
-        <Maps />         
+      <Maps />
     </>
   );
 }

@@ -1,67 +1,79 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
 import { Form, Logo } from "../../Atoms";
 import LoginStyle from "../login/Login.style";
-import { AuthContext } from "../../../context/AuthProvider";
+// import { AuthContext, useAuth } from "../../../context/AuthProvider";
 import { verify, validate } from "../../../api";
+import { getUser } from "../../../utils";
 import swal from "sweetalert";
 
-// let email = "jessyinks14@gmail.com";
 function Verification() {
-  const [state] = useContext(AuthContext);
+  const [code, setCode] = useState('');
+  // const authProp = useAuth();
+  
   const navigate = useNavigate();
 
-  let { username } = state;
   async function handleResend() {
-    const { data, error } = await validate(username);
-    console.log(username);
-    if (data?.data?.success) {
-      alert("Successful");
-    swal("Resent", data?.data?.message, "success", {
+    const apiValidateResponse = await validate(getUser());
+    
+    if (apiValidateResponse?.data?.success) {
+      swal("Resent", apiValidateResponse?.data?.message, "success", {
       button: false,
       timer: 3000,
     });
       setCode("");
-    } else if (!data?.data?.success) {
-  swal("Oops", data?.data?.message, "error", {
-    button: false,
-    timer: 3000,
-  });
-    } else {
-  swal("Oops", error, "error", {
-    button: false,
-    timer: 3000,
-  });    }
-  }
-  const [code, setCode] = useState("");
-  async function handleSubmit() {
-        console.log(code);
-
-    const { data, error } = await verify(username, code);
-    if (data?.data?.success) {
-      swal({
-        text: "Account verification was Successful",
-        icon: "success",
-        button: false,
-        timer: 3000,
-      });
-      setCode("");
-      return navigate("/login");
-    } else if (!data?.data?.success) {
-      swal("Oops", data?.data?.message, "error", {
+    } else if (!apiValidateResponse?.data?.success) {
+      swal("Oops", apiValidateResponse?.data?.message, "error", {
         button: false,
         timer: 3000,
       });
     } else {
-      swal("Oops", error, "error", {
+      swal("Oops", apiValidateResponse?.error, "error", {
         button: false,
         timer: 3000,
       });
     }
   }
+
+  async function handleSubmit() {
+    try {
+    if(code.toString().length >= 6){
+      const apiVerifyResponse = await verify({username: getUser(), otp: code.toString()});
+      
+      if (apiVerifyResponse?.data?.success) {
+        swal({
+          text: "Account verification was Successful",
+          icon: "success",
+          button: false,
+          timer: 3000,
+        });
+        setCode("");
+        return navigate("/login");
+      } else if (!apiVerifyResponse?.data?.success) {
+        swal("Oops", apiVerifyResponse?.data?.message, "error", {
+          button: false,
+          timer: 3000,
+        });
+      } else {
+        swal("Oops", apiVerifyResponse?.error, "error", {
+          button: false,
+          timer: 3000,
+        });
+      }
+    }
+    } catch (error) {
+      console.log('error', error);
+      swal("Oops", error?.message, "error", {
+        button: false,
+        timer: 3000,
+      });
+    }
+    
+  }
   if (code.toString().length >= 6)
     setTimeout(() => {
+      console.log('calling handleSubmit fxn');
       handleSubmit();
     }, 3000);
   const handleChange = (code) => setCode(code);

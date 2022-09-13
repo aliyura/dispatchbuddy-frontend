@@ -4,8 +4,9 @@ import { Button, Form, Logo } from "../../Atoms";
 import { Field } from "../../Molecules";
 import LoginStyle from "./Login.style";
 import { AuthContext } from "../../../context/AuthProvider";
-// import { login } from "../../../api";
+import { login } from "../../../api";
 import swal from "sweetalert";
+// import { setAuthToken } from "../../../utils";
 
 const initial = {
   grant_type: "password",
@@ -34,10 +35,10 @@ function Login() {
         });
     }
     else {
-      // const { data, error } = await login(formData);
-      // if (data?.data?.success) {
-        // setAuthToken(token)
-        // dispatch({ type: "LOGIN_SUCCESS", payload: data?.data?.token });
+      const response = await login(formData);
+
+      if (response?.status === 200) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: response?.data });
         swal({
           text: "Login was Successful",
           icon: "success",
@@ -45,21 +46,22 @@ function Login() {
           timer: 3000,
         });
         return navigate("/location");
-      // } else if (!data?.data?.success) {
-      //   dispatch({
-      //     type: "LOGIN_FAILURE",
-      //     payload: data?.data?.message,
-      //   });
-        // swal("Oops", data?.data?.message, "error", {
-        //   button: false,
-        //   timer: 3000,
-        // });
-      // } else {
-      //   swal("Oops", error, "error", {
-      //     button: false,
-      //     timer: 3000,
-      //   });
-      // }
+      }else if (!response?.data?.success) {
+        swal("Oops", response?.data?.error_desription, "error", {
+          button: false,
+          timer: 3000,
+        });
+      } else {
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: response?.error,
+        });
+        console.log(response, 'error faced>....?')
+        swal("Oops", response?.data?.error_desription, "error", {
+          button: false,
+          timer: 3000,
+        });
+      }
     }
   };
 

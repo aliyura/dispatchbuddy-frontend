@@ -11,6 +11,7 @@ const Button = styled.button`
   border-style: solid;
   padding: 0.8rem;
   margin-top: 1.14rem;
+  cursor: pointer;
 `;
 
 export default Button;

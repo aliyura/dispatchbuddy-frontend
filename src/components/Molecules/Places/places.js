@@ -1,67 +1,85 @@
-import React from "react";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from "react-places-autocomplete";
+import React, {useContext} from "react";
+import PlacesAutocomplete from "react-places-autocomplete";
 import { Form, Button } from "../../Atoms";
 import { Card } from "../../Molecules";
 import PlaceStyle from "./places.style";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { addLocations } from "../../../api/auth";
+import { AuthContext } from "../../../context/AuthProvider";
 
-export default function Places() {
-  const [address, setAddress] = React.useState("");
-  const [coordinates, setCoordinates] = React.useState({
-    lat: null,
-    lng: null
-  });
+export default function Places({onChange, onSelect, address, handleSetAddress, locations, removeHandler}) {
   const navigate = useNavigate();
-  const handleChange = (address) => {
-    setAddress(address)
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        console.log('Success', latLng)
-        setCoordinates(latLng)
-    })
-      .catch(error => console.error('Error', error));
-  }
-
-   console.log(coordinates.lat)
-  console.log(coordinates.lng)
+  const [, dispatch] = useContext(AuthContext);
   
-  const handleClick = () => {
-    if (address) {
-      swal("Successful!", `${address} has been added. `, "success", {
+  const handleClick = async (e) => {
+    try {
+      e.preventDefault();
+      dispatch({ type: "ADD_LOCATION_START" });
+      // console.log(locations,'set in state values for submisstion')
+      const apiResponse = await addLocations(locations);
+      // console.log(apiResponse, 'RESPONSE at adding locations...');
+
+      if (apiResponse?.data?.success) {
+        dispatch({ type: "ADD_LOCATION_SUCCESS", payload: apiResponse?.data?.payload });
+        swal("Successful!", `Your Preferences have been added. `, "success", {
+          button: false,
+          timer: 2000,
+        });
+        handleSetAddress("")
+        navigate('/my_deliveries');
+      }else if(!apiResponse?.data?.success){
+        //Check again though
+        dispatch({ type: "ADD_LOCATION_ERROR", payload: apiResponse?.data?.payload });
+        swal("Error!", apiResponse?.data?.message, "error", {
+          button: false,
+          timer: 2000,
+        });
+      } else {
+        //Check again too though
+        dispatch({ type: "ADD_LOCATION_ERROR", payload: apiResponse?.error });
+        swal("Error!", apiResponse?.data?.message || apiResponse?.error, "error", {
+          button: false,
+          timer: 2000,
+        });
+      }
+    } catch (error) {
+      console.log('error', error);
+      swal("Oops", error?.message, "error", {
         button: false,
-        timer: 2000,
-      });
-      setAddress("")
-      navigate('/my_deliveries')
-    }else {
-      swal("Error!", `Enter a valid address. `, "error", {
-        button: false,
-        timer: 2000,
+        timer: 3000,
       });
     }
+    
   }
+
   return (
     
     <PlaceStyle>
       <PlacesAutocomplete
         value={address}
-        onChange={handleChange}
+        onChange={onChange}
+        onSelect={onSelect}
+        googleCallbackName="initTwo"
       >
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <div>
-            {/* <p>Latitude: {coordinates.lat}</p>
-            <p>Longitude: {coordinates.lng}</p> */}
             <div className="forms">
               <h1>Select locations to cover</h1>              
               <Form className="form-style">
               <input {...getInputProps({placeholder: 'Search Places ...',
-                className: 'location-search-input'})}  />               
-              {address && <h2>Result</h2>}
+                className: 'location-search-input'})}  />
+                {/* Use array length checker */}
+              {locations.length > 0 && 
+                <div className="box-wrapper">
+                  {locations.map((item, idx) => 
+                    <div key={idx} className="box">
+                      <span>{item}</span>
+                      <span onClick={removeHandler(idx)} className="closer">X</span>
+                    </div>
+                  )}
+                  
+                </div>}
               </Form>
               
             </div>
