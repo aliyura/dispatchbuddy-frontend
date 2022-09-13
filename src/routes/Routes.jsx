@@ -6,6 +6,7 @@ import {
   ForgotPassword,
   CreateNewPassword,
   Profile,
+  
 } from "../Pages";
 
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
   { path: "/forgot-password", component: ForgotPassword },
   { path: "/new-password", component: CreateNewPassword },
   { path: "/profile", component: Profile },
+
 ];
 
 export { routes };

@@ -11,6 +11,7 @@ import NotFound from "./NotFound";
 import  MyDeliveries from "./MyDeliveries";
 import RidersLocation from "./RidersLocation";
 import RatingsPage from "./Ratings";
+import MyRequest from "./MyRequest";
 
 export {
   SignUp,
@@ -24,4 +25,5 @@ export {
   UpdatePasswordPage,
   EditProfilePage,
   NotFound,
+  MyRequest 
 };

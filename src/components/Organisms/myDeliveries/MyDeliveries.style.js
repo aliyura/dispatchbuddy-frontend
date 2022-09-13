@@ -3,6 +3,9 @@ import styled from "styled-components";
 const MyDeliveriesStyle = styled.main`
   width: 100%;
   position: relative;
+  .none {
+    text-align: center;
+  }
   h2 {
     font-size: 2.3rem;
     line-height: 2.79rem;
@@ -27,8 +30,7 @@ const MyDeliveriesStyle = styled.main`
     .today h5 {
       margin-top: 0;
     }
-    
   }
 `;
 
-export default MyDeliveriesStyle
+export default MyDeliveriesStyle;

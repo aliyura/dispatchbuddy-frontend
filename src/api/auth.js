@@ -254,6 +254,75 @@ export const updatePassword = async (formdata, email) => {
   }
 }
 
+export const acceptRide = async (id, reason) => {
+  try {
+    const data = JSON.stringify({
+      id,
+      reason,
+    });
+
+    const config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BACKEND_URL}/rider/reject-request`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    return axios(config)
+      .then((response) => {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
+  } catch (err) {
+    return {
+      data: null,
+      error: err,
+    };
+  }
+};
+export const rejectRide = async (id, reason) => {
+  try {
+    const data = JSON.stringify({
+      id,
+      reason
+    });
+
+    const config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BACKEND_URL}/rider/reject-request`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    return axios(config)
+      .then((response) => {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
+  } catch (err) {
+    return {
+      data: null,
+      error: err,
+    };
+  }
+};
+
 export const updateProfile = async(username, country, city, gender, dob) => {
   try {
     const data = JSON.stringify({

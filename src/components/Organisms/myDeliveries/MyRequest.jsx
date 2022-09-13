@@ -1,4 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
+import swal from "sweetalert";
+
 import PageStyle from "../../Atoms/Page.style";
 import { NavBar } from "../../Molecules";
 import HistoryCard from "../../Molecules/HistoryCard/HistoryCard";
@@ -7,11 +9,12 @@ import { getAllRequests } from "../../../api/auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { isToday, isYesterday, parseISO } from "date-fns/";
 import Modal from "react-modal";
+import {rejectRide} from "../../../api/auth"
 
 import Ratings from "../ratings/Ratings";
 Modal.setAppElement("#root");
 
-function MyDeliveries() {
+function MyRequest() {
   const [, dispatch] = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   const [rating, setRating] = useState(0);
@@ -21,6 +24,25 @@ function MyDeliveries() {
     console.log(value);
   };
 
+  const handleReject = async(id,reason) => {
+    const rejectRideResponse = await rejectRide(id,reason);
+  
+    if (rejectRideResponse?.data?.success) {
+      dispatch({ type: "UPDATE_PASSWORD_SUCCESS", payload: rejectRideResponse?.data?.payload });
+      swal({
+        text: "Password Update was Successful",
+        icon: "success",
+        button: false,
+        timer: 3000,
+      });
+      // return navigate("/profile");
+    } else if (!rejectRideResponse?.data?.success) {
+      swal("Oops", rejectRideResponse?.data?.message, "error", {
+        button: false,
+        timer: 3000,
+      });
+    }
+  }
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
@@ -49,32 +71,27 @@ function MyDeliveries() {
   
   let todaysRequests = requests?.filter(
     (request) =>
-      (isToday(parseISO(request?.lastModifiedDate)) === true &&
-        request?.status !== "PC") ||
-      (isToday(parseISO(request?.createdDate)) === true &&
-        request?.status !== "PC")
+      isToday(parseISO(request?.lastModifiedDate)) === true ||
+      isToday(parseISO(request?.createdDate)) === true
   );
   let yesterdaysRequests = requests?.filter(
     (request) =>
-      (isYesterday(parseISO(request?.lastModifiedDate)) === true&&
-        request?.status !== "PC") ||
-      (isYesterday(parseISO(request?.createdDate)) === true&&
-        request?.status !== "PC")
+      isYesterday(parseISO(request?.lastModifiedDate)) === true ||
+      isYesterday(parseISO(request?.createdDate)) === true
   );
   let others = requests?.filter(
     (request) =>
       isToday(parseISO(request?.lastModifiedDate)) === false &&
       isYesterday(parseISO(request?.lastModifiedDate)) === false &&
       isToday(parseISO(request?.createdDate)) === false &&
-      isYesterday(parseISO(request?.createdDate)) === false &&
-        request?.status !== "PC"
+      isYesterday(parseISO(request?.createdDate)) === false
   );
   return (
     <>
       <NavBar />
       <MyDeliveriesStyle>
         <div className="banner">
-          <h2>My Deliveries</h2>
+          <h2>All Requests</h2>
         </div>
         <PageStyle id="deliveries">
           <Modal
@@ -91,6 +108,7 @@ function MyDeliveries() {
               toggleModal={toggleModal}
             />
           </Modal>
+          {!todaysRequests && !yesterdaysRequests && !others && <h5 className="none">No requests!!</h5>}
           {todaysRequests?.length >= 1 && (
             <div className="today">
               <h5>Today</h5>
@@ -99,11 +117,13 @@ function MyDeliveries() {
                   onShow={toggleModal}
                   delivery={request}
                   key={index}
+                  request
+                  reject={handleReject}
                 />
               ))}
             </div>
           )}
-          {yesterdaysRequests?.length >= 1 ? (
+          {yesterdaysRequests?.length >= 1 && (
             <div className="yesterday">
               <h5>Yesterday</h5>
               {yesterdaysRequests?.map((request, index) => (
@@ -111,18 +131,12 @@ function MyDeliveries() {
                   onShow={toggleModal}
                   delivery={request}
                   key={index}
+                  request
                 />
               ))}
             </div>
-          ): (
-            <>
-            <div className="yesterday">
-              <h5>Yesterday</h5>
-              You didn't have any Requests yesterday
-            </div>
-            </>
           )}
-          {others?.length >= 1 ? (
+          {others?.length >= 1 && (
             <div className="previous">
               <h5>Older requests</h5>
               {others?.map((request, index) => (
@@ -130,21 +144,15 @@ function MyDeliveries() {
                   onShow={toggleModal}
                   delivery={request}
                   key={index}
+                  request
                 />
               ))}
             </div>
-          ) : (
-            <>
-            <div className="previous">
-              <h5>Older requests</h5>
-              You have not any Requests Previously
-            </div>
-            </>
-          ) }
+          )}
         </PageStyle>
       </MyDeliveriesStyle>
     </>
   );
 }
 
-export default MyDeliveries;
+export default MyRequest;

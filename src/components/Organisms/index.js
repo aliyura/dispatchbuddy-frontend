@@ -9,6 +9,7 @@ import Profile from './profile/Profile';
 import UpdatePassword from './updatePassword/updatePassword';
 import EditProfile from './editProfile/EditProfile';
 import SelectRider from './selectRider/SelectRider';
+import MyRequest from "./myDeliveries/MyRequest";
 
 export {
   SignUp,
@@ -22,4 +23,5 @@ export {
   UpdatePassword,
   EditProfile,
   SelectRider,
+  MyRequest
 };
