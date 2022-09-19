@@ -1,36 +1,35 @@
 import axios from "axios";
-import qs from 'qs';
+import qs from "qs";
 
 export const login = async ({ grant_type, email, password }) => {
   try {
-     const basicAuth = "Basic " + window.btoa("web-client:password");
-     let data = qs.stringify({
-      'grant_type': grant_type,
-      'username': email,
-      'password': password
-     });
-     let config = {
-       method: 'post',
-       url: `${process.env.REACT_APP_BASE_LOGIN_URL}/oauth/token`,
-       headers: {
-        'Authorization': basicAuth,
-        'Content-Type': 'application/x-www-form-urlencoded'
-       },
-       data : data
-     };
-     
-     return axios(config)
-     .then( (response) => {
+    const basicAuth = "Basic " + window.btoa("web-client:password");
+    let data = qs.stringify({
+      grant_type: grant_type,
+      username: email,
+      password: password,
+    });
+    let config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BASE_LOGIN_URL}/oauth/token`,
+      headers: {
+        Authorization: basicAuth,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      data: data,
+    };
+
+    return axios(config)
+      .then((response) => {
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
-
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
   } catch (err) {
     return {
       data: null,
@@ -48,33 +47,33 @@ export const signup = async ({
 }) => {
   try {
     const data = JSON.stringify({
-      "name": name,
-      "email": email,
-      "phoneNumber": phoneNumber,
-      "password": password,
-      "dateOfBirth": dateOfBirth,
-      "authProvider": "EMAIL"
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: password,
+      dateOfBirth: dateOfBirth,
+      authProvider: "EMAIL",
     });
     const config = {
-      method: 'post',
+      method: "post",
       url: `${process.env.REACT_APP_BACKEND_URL}/user/signup`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      data: data
+      data: data,
     };
 
     return axios(config)
-     .then( (response) => {
+      .then((response) => {
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
 
     // const response = await axios.post(
     //   "api/user/signup",
@@ -106,29 +105,29 @@ export const verify = async ({ username, otp }) => {
   //Username is an email
   try {
     const data = JSON.stringify({
-      "username": username,
-      "otp": otp,
+      username: username,
+      otp: otp,
     });
     const config = {
-      method: 'post',
+      method: "post",
       url: `${process.env.REACT_APP_BACKEND_URL}/user/verify`,
-      headers: { 
-        'Content-Type': 'application/json'
+      headers: {
+        "Content-Type": "application/json",
       },
-      data: data
+      data: data,
     };
 
     return axios(config)
-     .then( (response) => {
+      .then((response) => {
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
   } catch (err) {
     return {
       data: null,
@@ -141,30 +140,29 @@ export const validate = async (username) => {
   console.log(username);
   try {
     var data = JSON.stringify({
-      "username": username
+      username: username,
     });
-    
+
     const config = {
-      method: 'post',
+      method: "post",
       url: `${process.env.REACT_APP_BACKEND_URL}/user/validate`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      data: data
+      data: data,
     };
 
     return axios(config)
-    .then( (response) => {
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-    })
-
+      .then((response) => {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
 
     // const response = await axios.post(
     //   "api/user/validate",
@@ -220,40 +218,68 @@ export const reset = async (
 export const updatePassword = async (formdata, email) => {
   try {
     const data = JSON.stringify({
-      "username": email,
-      "password": formdata.new_password
+      username: email,
+      password: formdata.new_password,
     });
-    
+
     const config = {
-      method: 'post',
+      method: "post",
       url: `${process.env.REACT_APP_BACKEND_URL}/user/password-reset`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      data: data
+      data: data,
     };
 
     return axios(config)
-     .then( (response) => {
+      .then((response) => {
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
-
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
   } catch (err) {
     return {
       data: null,
       error: err,
     };
   }
-}
+};
 
-export const acceptRide = async (id, reason) => {
+export const acceptRide = async (id) => {
+  try {
+    const config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BACKEND_URL}/rider/accept-request/${id}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    return axios(config)
+      .then((response) => {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
+  } catch (err) {
+    return {
+      data: null,
+      error: err,
+    };
+  }
+};
+export const rejectRide = async (id, reason = "User is too far") => {
   try {
     const data = JSON.stringify({
       id,
@@ -264,40 +290,7 @@ export const acceptRide = async (id, reason) => {
       method: "post",
       url: `${process.env.REACT_APP_BACKEND_URL}/rider/reject-request`,
       headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    return axios(config)
-      .then((response) => {
-        return response;
-      })
-      .catch(function (error) {
-        console.log(error, "do we have error");
-        return {
-          data: null,
-          error,
-        };
-      });
-  } catch (err) {
-    return {
-      data: null,
-      error: err,
-    };
-  }
-};
-export const rejectRide = async (id, reason) => {
-  try {
-    const data = JSON.stringify({
-      id,
-      reason
-    });
-
-    const config = {
-      method: "post",
-      url: `${process.env.REACT_APP_BACKEND_URL}/rider/reject-request`,
-      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       data: data,
@@ -322,99 +315,96 @@ export const rejectRide = async (id, reason) => {
   }
 };
 
-export const updateProfile = async(username, country, city, gender, dob) => {
+export const updateProfile = async (username, country, city, gender, dob) => {
   try {
     const data = JSON.stringify({
-      "name": username,
-      "country": country,
-      "city": city,
-      "gender": gender,
-      "dateOfBirth": dob.replace('-', '/')
+      name: username,
+      country: country,
+      city: city,
+      gender: gender,
+      dateOfBirth: dob.replace("-", "/"),
     });
 
     const config = {
-      method: 'put',
+      method: "put",
       url: `${process.env.REACT_APP_BACKEND_URL}/user/update`,
-      headers: { 
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, 
-        'Content-Type': 'application/json'
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
-      data : data
+      data: data,
     };
 
     return axios(config)
-     .then( (response) => {
+      .then((response) => {
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
-  
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
   } catch (err) {
-    console.log(err, 'at update route...');
+    console.log(err, "at update route...");
     return {
       data: null,
       error: err,
     };
   }
-}
+};
 
 export const getProfile = async (id) => {
   try {
     const config = {
-      method: 'get',
+      method: "get",
       url: `${process.env.REACT_APP_BACKEND_URL}/user/get-by-id/${id}`,
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     };
 
     return axios(config)
-     .then( (response) => {
+      .then((response) => {
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
   } catch (err) {
     return {
       data: null,
       error: err,
     };
   }
-}
+};
 
-export const getAllRequests = async (
- page=0
-) => {
+export const getAllRequests = async (page = 0) => {
   try {
     let config = {
-      method: 'get',
+      method: "get",
       url: `${process.env.REACT_APP_BACKEND_URL}/rider/requests?page=${page}`,
       headers: {
-       "Authorization": `Bearer ${localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     };
 
     return axios(config)
-     .then( (response) => {
+      .then((response) => {
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
   } catch (err) {
     return {
       data: null,
@@ -424,67 +414,68 @@ export const getAllRequests = async (
 };
 
 export const getAllRiders = async (
-  page=0, pickup="Ajah", destination="Ikeja"
- ) => {
-   try {
-    let config = {
-      method: 'get',
-      url: `${process.env.REACT_APP_BACKEND_URL}/rider/search?page=${page}&pickup=${pickup}&destination=${destination}`,
-      headers: { }
-    };
-    
-    return axios(config)
-     .then( (response) => {
-       console.log(response, 'respond....');
-        return response;
-      })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
-
-   } catch (err) {
-     return {
-       data: null,
-       error: err,
-     };
-   }
- };
-
-export const addLocations = async (locations) => {
+  page = 0,
+  pickup = "Ajah",
+  destination = "Ikeja"
+) => {
   try {
-    const data = JSON.stringify({
-      "locations": locations
-    })
-    
-    const config = {
-      method: 'post',
-      url: `${process.env.REACT_APP_BACKEND_URL}/rider/add-locations`,
-      headers: { 
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json'
-      },
-      data : data
+    let config = {
+      method: "get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/rider/search?page=${page}&pickup=${pickup}&destination=${destination}`,
+      headers: {},
     };
 
     return axios(config)
-     .then( (response) => {
+      .then((response) => {
+        console.log(response, "respond....");
         return response;
       })
-     .catch(function (error) {
-      console.log(error, 'do we have error');
-      return {
-        data: null,
-        error,
-      }
-     });
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
   } catch (err) {
     return {
       data: null,
       error: err,
     };
   }
-}
+};
+
+export const addLocations = async (locations) => {
+  try {
+    const data = JSON.stringify({
+      locations: locations,
+    });
+
+    const config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BACKEND_URL}/rider/add-locations`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    return axios(config)
+      .then((response) => {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
+  } catch (err) {
+    return {
+      data: null,
+      error: err,
+    };
+  }
+};
