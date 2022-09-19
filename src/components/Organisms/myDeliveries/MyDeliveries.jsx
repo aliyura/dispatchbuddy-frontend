@@ -27,7 +27,7 @@ function MyDeliveries() {
     setIsOpen(!isOpen);
     setRating(0);
   }
-  
+
   useEffect(() => {
     dispatch({ type: "GET_DELIVERIES_START" });
 
@@ -35,8 +35,11 @@ function MyDeliveries() {
       const apiResponse = await getAllRequests(0);
       if (apiResponse?.data?.success) {
         setRequests(apiResponse?.data?.payload?.content);
-        dispatch({ type: "GET_DELIVERIES_SUCCESS", payload: apiResponse?.data?.payload?.content });
-      }else if(!apiResponse?.data?.success){
+        dispatch({
+          type: "GET_DELIVERIES_SUCCESS",
+          payload: apiResponse?.data?.payload?.content,
+        });
+      } else if (!apiResponse?.data?.success) {
         dispatch({ type: "GET_DELIVERIES_ERROR", payload: apiResponse?.error });
       } else {
         dispatch({ type: "GET_DELIVERIES_ERROR", payload: apiResponse?.error });
@@ -46,20 +49,20 @@ function MyDeliveries() {
   }, [dispatch]);
 
   console.log(requests);
-  
+
   let todaysRequests = requests?.filter(
     (request) =>
       (isToday(parseISO(request?.lastModifiedDate)) === true &&
-        request?.status !== "PC") ||
+        request?.status === "CO") ||
       (isToday(parseISO(request?.createdDate)) === true &&
-        request?.status !== "PC")
+        request?.status === "CO")
   );
   let yesterdaysRequests = requests?.filter(
     (request) =>
-      (isYesterday(parseISO(request?.lastModifiedDate)) === true&&
-        request?.status !== "PC") ||
-      (isYesterday(parseISO(request?.createdDate)) === true&&
-        request?.status !== "PC")
+      (isYesterday(parseISO(request?.lastModifiedDate)) === true &&
+        request?.status === "CO") ||
+      (isYesterday(parseISO(request?.createdDate)) === true &&
+        request?.status === "CO")
   );
   let others = requests?.filter(
     (request) =>
@@ -67,7 +70,7 @@ function MyDeliveries() {
       isYesterday(parseISO(request?.lastModifiedDate)) === false &&
       isToday(parseISO(request?.createdDate)) === false &&
       isYesterday(parseISO(request?.createdDate)) === false &&
-        request?.status !== "PC"
+      request?.status === "CO"
   );
   return (
     <>
@@ -114,12 +117,12 @@ function MyDeliveries() {
                 />
               ))}
             </div>
-          ): (
+          ) : (
             <>
-            <div className="yesterday">
-              <h5>Yesterday</h5>
-              You didn't have any Requests yesterday
-            </div>
+              <div className="yesterday">
+                <h5>Yesterday</h5>
+                You didn't have any Requests yesterday
+              </div>
             </>
           )}
           {others?.length >= 1 ? (
@@ -135,12 +138,12 @@ function MyDeliveries() {
             </div>
           ) : (
             <>
-            <div className="previous">
-              <h5>Older requests</h5>
-              You have not any Requests Previously
-            </div>
+              <div className="previous">
+                <h5>Older requests</h5>
+                You have not any Requests Previously
+              </div>
             </>
-          ) }
+          )}
         </PageStyle>
       </MyDeliveriesStyle>
     </>
