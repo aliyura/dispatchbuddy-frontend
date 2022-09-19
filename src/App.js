@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import {
@@ -18,16 +18,10 @@ import {
   RatingsPage,
 } from "./pages";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
-import { AuthContext, AuthProvider } from "./context/AuthProvider";
+import { AuthProvider } from "./context/AuthProvider";
 import { SelectRider } from "./components";
 
 function App() {
-  // const [state, dispatch] = useContext(AuthContext);
-
-  // useEffect(() => {
-
-  //   dispatch({ type: "LOAD_USER" });
-  // }, [dispatch]);
 
   return (
     <AuthProvider>
