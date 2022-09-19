@@ -44,7 +44,16 @@ const HistoryCardStyle = styled.div`
     width: 48%;
     transition: all 0.5s;
   }
-
+  .status-reject {
+    color: red;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .status-accept {
+    color: green;
+    background-color: transparent;
+    border-color: transparent;
+  }
   .outline:hover,
   .history-btn:hover {
     background-color: rgba(88, 10, 255, 0.1);
