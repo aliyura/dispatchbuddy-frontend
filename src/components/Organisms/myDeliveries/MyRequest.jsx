@@ -1,6 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-import swal from "sweetalert";
-
 import PageStyle from "../../Atoms/Page.style";
 import { NavBar } from "../../Molecules";
 import HistoryCard from "../../Molecules/HistoryCard/HistoryCard";
@@ -9,9 +7,9 @@ import { getAllRequests } from "../../../api/auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { isToday, isYesterday, parseISO } from "date-fns/";
 import Modal from "react-modal";
-import {rejectRide} from "../../../api/auth"
-
 import Ratings from "../ratings/Ratings";
+import swal from "sweetalert";
+
 Modal.setAppElement("#root");
 
 function MyRequest() {
@@ -19,37 +17,26 @@ function MyRequest() {
   const [requests, setRequests] = useState([]);
   const [rating, setRating] = useState(0);
 
+  const success = () => {
+       swal({
+         text: `Thank you for rating`,
+         icon: "success",
+         button: false,
+         timer: 3000,
+       });
+  }
   const handleRating = (value) => {
     setRating(value);
-    console.log(value);
+    success()
   };
 
-  const handleReject = async(id,reason) => {
-    const rejectRideResponse = await rejectRide(id,reason);
-  
-    if (rejectRideResponse?.data?.success) {
-      dispatch({ type: "UPDATE_PASSWORD_SUCCESS", payload: rejectRideResponse?.data?.payload });
-      swal({
-        text: "Password Update was Successful",
-        icon: "success",
-        button: false,
-        timer: 3000,
-      });
-      // return navigate("/profile");
-    } else if (!rejectRideResponse?.data?.success) {
-      swal("Oops", rejectRideResponse?.data?.message, "error", {
-        button: false,
-        timer: 3000,
-      });
-    }
-  }
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
     setIsOpen(!isOpen);
     setRating(0);
   }
-  
+
   useEffect(() => {
     dispatch({ type: "GET_DELIVERIES_START" });
 
@@ -57,8 +44,11 @@ function MyRequest() {
       const apiResponse = await getAllRequests(0);
       if (apiResponse?.data?.success) {
         setRequests(apiResponse?.data?.payload?.content);
-        dispatch({ type: "GET_DELIVERIES_SUCCESS", payload: apiResponse?.data?.payload?.content });
-      }else if(!apiResponse?.data?.success){
+        dispatch({
+          type: "GET_DELIVERIES_SUCCESS",
+          payload: apiResponse?.data?.payload?.content,
+        });
+      } else if (!apiResponse?.data?.success) {
         dispatch({ type: "GET_DELIVERIES_ERROR", payload: apiResponse?.error });
       } else {
         dispatch({ type: "GET_DELIVERIES_ERROR", payload: apiResponse?.error });
@@ -68,7 +58,7 @@ function MyRequest() {
   }, [dispatch]);
 
   console.log(requests);
-  
+
   let todaysRequests = requests?.filter(
     (request) =>
       isToday(parseISO(request?.lastModifiedDate)) === true ||
@@ -108,7 +98,9 @@ function MyRequest() {
               toggleModal={toggleModal}
             />
           </Modal>
-          {!todaysRequests && !yesterdaysRequests && !others && <h5 className="none">No requests!!</h5>}
+          {!todaysRequests && !yesterdaysRequests && !others && (
+            <h5 className="none">No requests!!</h5>
+          )}
           {todaysRequests?.length >= 1 && (
             <div className="today">
               <h5>Today</h5>
@@ -118,7 +110,6 @@ function MyRequest() {
                   delivery={request}
                   key={index}
                   request
-                  reject={handleReject}
                 />
               ))}
             </div>
