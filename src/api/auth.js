@@ -279,6 +279,36 @@ export const acceptRide = async (id) => {
     };
   }
 };
+
+export const completeRide = async (id) => {
+  try {
+    const config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BACKEND_URL}/rider/close-request/${id}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    return axios(config)
+      .then((response) => {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error, "do we have error");
+        return {
+          data: null,
+          error,
+        };
+      });
+  } catch (err) {
+    return {
+      data: null,
+      error: err,
+    };
+  }
+};
 export const rejectRide = async (id, reason = "User is too far") => {
   try {
     const data = JSON.stringify({

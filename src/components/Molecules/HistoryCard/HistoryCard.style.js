@@ -49,8 +49,8 @@ const HistoryCardStyle = styled.div`
     background-color: transparent;
     border-color: transparent;
   }
-  .status-accept {
-    color: green;
+  .status-complete {
+    color: #580aff;
     background-color: transparent;
     border-color: transparent;
   }
