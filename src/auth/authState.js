@@ -11,6 +11,8 @@ import {
   RESET_PASSWORD,
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_SUCCESS,
+  ACCEPT_RIDE_SUCCESS,
+  ACCEPT_RIDE_FAILURE,
 } from "./types";
 import { apiPost } from "../utils/apiHelper";
 
