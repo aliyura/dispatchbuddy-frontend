@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RiderHistoryCardStyle from './RiderHistoryCard.style';
 import profiles from '../../../assets/images/profile.png';
 import { Button } from "../../Atoms";
 import { format } from "date-fns/";
 
-function RiderHistoryCard({rider}) {
-  console.log(rider, 'info passed to component');
+function RiderHistoryCard({rider, uuid}) {
   const navigate = useNavigate();
-  const [riderUuid, setRiderUuid] = useState("")
   
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     //Contact the Rider selected.
-    console.log('clicked to request rider...');
-    // console.log(id, 'passed here')
-    return navigate('/request-form');
-  }
+    localStorage.setItem('uuid', uuid);
+    navigate('/request-form');
+  }, [navigate, uuid])
 
-  useEffect(() => {
-    handleClick();
-  }, [])
 
   return (
     <RiderHistoryCardStyle>
@@ -37,10 +31,7 @@ function RiderHistoryCard({rider}) {
         <div className="rider-info_right">
           <p>Joined, {rider?.createdDate ? format(new Date(rider?.createdDate ), "yyyy-MM-dd") : "N/A"}</p>  
           {/** Where we should send request to Rider as a user. */}
-          <Button onClick={() => {
-            handleClick()
-            setRiderUuid()
-          }}>Contact Rider</Button>
+          <Button onClick={handleClick}>Contact Rider</Button>
         </div>
       </div>
     </RiderHistoryCardStyle>

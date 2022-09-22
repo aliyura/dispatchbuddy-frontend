@@ -39,7 +39,7 @@ function SelectRider() {
         <div className="today">
         {dataOfRiders.length >= 0 ? (dataOfRiders?.map(
             (request, index) =>
-             (<RiderHistoryCard rider={request} key={index} />)
+             (<RiderHistoryCard rider={request} uuid={request?.uuid} key={index} />)
         )) : <>No riders found in the locations you selected!</>
         }
         </div>

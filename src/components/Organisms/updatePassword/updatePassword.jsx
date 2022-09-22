@@ -21,9 +21,6 @@ function UpdatePassword() {
   const navigate = useNavigate();
   const [emailAddress, setEmailAddress] = useState("");
 
-  console.log('landing on update password page');
-  console.log(user,' found user.. on update pwd');
-
   const fetchUserDetails = useCallback(async () => {
     let apiResponse = await getProfile(user?.id);
     console.log(apiResponse, 'from get Profile on update pawd Page')
@@ -78,8 +75,6 @@ function UpdatePassword() {
           timer: 3000,
         });
       }else {
-        console.log('all are filled up... and password match');
-        console.log(formData, 'data passed', emailAddress, 'email passed too');
         const apiUpdatePassResponse = await updatePassword(formData, emailAddress);
   
         if (apiUpdatePassResponse?.data?.success) {
