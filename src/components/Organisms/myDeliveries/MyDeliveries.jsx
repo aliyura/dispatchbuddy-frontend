@@ -91,7 +91,7 @@ function MyDeliveries() {
               toggleModal={toggleModal}
             />
           </Modal>
-          {todaysRequests?.length >= 1 && (
+          {todaysRequests?.length >= 1 ? (
             <div className="today">
               <h5>Today</h5>
               {todaysRequests?.map((request, index) => (
@@ -102,7 +102,15 @@ function MyDeliveries() {
                 />
               ))}
             </div>
-          )}
+          ) : (
+            <>
+            <div className="today">
+              <h5>Today</h5>
+              You don't have any Requests today
+            </div>
+            </>
+          )
+          }
           {yesterdaysRequests?.length >= 1 ? (
             <div className="yesterday">
               <h5>Yesterday</h5>

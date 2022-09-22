@@ -12,6 +12,7 @@ import  MyDeliveries from "./MyDeliveries";
 import RidersLocation from "./RidersLocation";
 import RatingsPage from "./Ratings";
 import MyRequest from "./MyRequest";
+import RiderFormPage from "./RiderFormPage";
 
 export {
   SignUp,
@@ -25,5 +26,6 @@ export {
   UpdatePasswordPage,
   EditProfilePage,
   NotFound,
-  MyRequest 
+  MyRequest,
+  RiderFormPage,
 };

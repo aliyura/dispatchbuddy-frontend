@@ -16,6 +16,7 @@ import {
   RidersLocation,
   MyRequest,
   RatingsPage,
+  RiderFormPage,
 } from "./pages";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import { AuthProvider } from "./context/AuthProvider";
@@ -55,6 +56,7 @@ function App() {
         />
         <Route path="/rate" element={<RatingsPage />} />
         <Route path="/select-rider" element={<SelectRider />} />
+        <Route path="/request-form" element={<RiderFormPage />} />
         <Route
           path="/profile"
           element={

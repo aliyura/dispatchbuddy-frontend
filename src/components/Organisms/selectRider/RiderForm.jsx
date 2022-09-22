@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { getAllRiders } from "../../../api/auth";
 import { NavBar, Footer } from "../../Molecules";
-import RiderHistoryCard from "../../Molecules/RiderHistoryCard/RiderHistoryCard";
+import RiderRequestForm from "../../Molecules/RiderRequestForm/RiderRequestForm";
 import SelectRiderStyle from "./SelectRider.style";
 
-function SelectRider() {
+function RiderForm() {
     const [dataOfRiders, setDataOfRiders] = useState([]);
     const pickup = localStorage.getItem('pickup');
     const destination = localStorage.getItem('destination');
@@ -33,15 +33,11 @@ function SelectRider() {
       <NavBar />
       <SelectRiderStyle>
         <div className="banner">
-          <h2>Select from the list of<br />Dispatch Riders</h2>
-          <h3>We have them all just for you. Select a dispatch rider.</h3>
+          <h2>Contact your Dispatch Riders</h2>
+          <h3>We have them all just for you. Make your Order to your favorite dispatch rider.</h3>
         </div>
         <div className="today">
-        {dataOfRiders.length >= 0 ? (dataOfRiders?.map(
-            (request, index) =>
-             (<RiderHistoryCard rider={request} key={index} />)
-        )) : <>No riders found in the locations you selected!</>
-        }
+          <RiderRequestForm/>
         </div>
       </SelectRiderStyle>
       <Footer />
@@ -49,4 +45,4 @@ function SelectRider() {
   );
 }
 
-export default SelectRider;
+export default RiderForm;
