@@ -26,7 +26,7 @@ console.log(navData)
               to={info.path}
               id="image"
             >
-                <p>{info.text}</p>
+              <p>{info.text}</p>
             </NavText>
           );
         })}

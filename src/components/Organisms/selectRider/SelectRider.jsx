@@ -1,31 +1,33 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { getAllRiders } from "../../../api/auth";
-import { AuthContext } from "../../../context/AuthProvider";
 import { NavBar, Footer } from "../../Molecules";
 import RiderHistoryCard from "../../Molecules/RiderHistoryCard/RiderHistoryCard";
 import SelectRiderStyle from "./SelectRider.style";
 
 function SelectRider() {
-    const [, dispatch] = useContext(AuthContext);
-    const [requests, setRequests] = useState([]);
-getAllRiders()
-    useEffect(() => {
-        dispatch({ type: "GET_RIDER_START" });
+    const [dataOfRiders, setDataOfRiders] = useState([]);
+    const pickup = localStorage.getItem('pickup');
+    const destination = localStorage.getItem('destination');
     
-        async function loadRiders() {
-          const { data, error } = await getAllRiders(
-            0
-          );
-          if (data) {
-            setRequests(data);
-            dispatch({ type: "GET_RIDER_SUCCESS", payload: data });
-          } else {
-            dispatch({ type: "GET_RIDER_ERROR", payload: error });
-          }
+    const loadRiders = useCallback(async () => {
+      try {
+        const response = await getAllRiders(0, pickup, destination);
+        console.log(response, 'data from riders on Select Riders.... stuff...?>>>>');
+        if (response?.data?.success) {
+          setDataOfRiders(response?.data?.payload?.content);
         }
-        loadRiders()
-      }, [dispatch]);
-      console.log({requests});
+      } catch (err) {
+        return {
+          data: null,
+          error: err,
+        };
+      }
+    }, [destination, pickup])
+
+    useEffect(() => {
+      loadRiders();
+    },[loadRiders])
+    
     return (
     <>
       <NavBar />
@@ -35,26 +37,11 @@ getAllRiders()
           <h3>We have them all just for you. Select a dispatch rider.</h3>
         </div>
         <div className="today">
-        {requests?.map(
+        {dataOfRiders.length >= 0 ? (dataOfRiders?.map(
             (request, index) =>
              (<RiderHistoryCard rider={request} key={index} />)
-        )}
-        {requests?.map(
-            (request, index) =>
-             (<RiderHistoryCard rider={request} key={index} />)
-        )}
-        {requests?.map(
-            (request, index) =>
-             (<RiderHistoryCard rider={request} key={index} />)
-        )}
-        {requests?.map(
-            (request, index) =>
-             (<RiderHistoryCard rider={request} key={index} />)
-        )}
-        {requests?.map(
-            (request, index) =>
-             (<RiderHistoryCard rider={request} key={index} />)
-        )}
+        )) : <>No riders in this location!</>
+        }
         </div>
       </SelectRiderStyle>
       <Footer />

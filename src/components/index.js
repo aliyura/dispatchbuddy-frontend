@@ -10,6 +10,7 @@ import {
   UpdatePassword,
   EditProfile,
   SelectRider,
+  MyRequest
 } from "./Organisms";import RidersLocation from './Organisms/ridersLocation/RidersLocation'
 import Ratings from './Organisms/ratings/Ratings'
 
@@ -25,4 +26,5 @@ export {
   UpdatePassword,
   EditProfile,
   SelectRider,
+  MyRequest
 };

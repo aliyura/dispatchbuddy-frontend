@@ -24,12 +24,21 @@ function ForgotPassword() {
  };
   const handleSubmit = async(e) => {
     e.preventDefault();
-    if (!formData.email) alert("All fields are required")
+    if (!formData.email) {
+      swal("Failed!","All fields are required" , "error", {
+        button: false,
+        timer: 3000,
+      });
+      // alert("All fields are required")
+    }
     else {
       // console.log(formData);
-      const { data, error } = await validate(formData.email);
+
+      //Set email as user to localstorage...
+      localStorage.setItem('user', formData.email);
+      const apiValidateResponse = await validate(formData.email);
       // console.log(formData);
-      if (data?.data?.success) {
+      if (apiValidateResponse?.data?.success) {
         console.log(formData);
         dispatch({ type: "FORGOT_PASSWORD_SUCCESS", payload: formData.email });
         swal({
@@ -38,28 +47,90 @@ function ForgotPassword() {
           button: false,
           timer: 3000,
         });
+        //Should redirect to verify otp
          setTimeout(() => {
-         return navigate("/");
+         return navigate("/verification");
         }, 3000);;
-      } else if (!data?.data?.success) {
-        swal("Oops", data?.data?.message, "error", {
+      } else if (!apiValidateResponse?.data?.success) {
+        swal("Oops", apiValidateResponse?.data?.message, "error", {
           button: false,
           timer: 3000,
         });
       } else {
-        swal("Oops", error, "error", {
+        swal("Oops", apiValidateResponse?.error, "error", {
           button: false,
           timer: 3000,
         });
       }
     }
+
+    // const handleSubmit = async (e) => {
+      // alert('Submitted!');
+      // e.preventDefault();
+      // const formComplete = formData.old_password && formData.new_password && formData.cfm_password;
+      // dispatch({ type: "UPDATE_PASSWORD_START" });
+      // if (!formComplete) alert("All fields are required")
+       
+      if (!true){
+        // swal("Failed!","Please fill all details" , "error", {
+        //   button: false,
+        //   timer: 3000,
+        // });
+      } else {
+  
+        if(formData.new_password !== formData.cfm_password){
+          swal("Failed!","Your passwords dont match" , "error", {
+            button: false,
+            timer: 3000,
+          });
+        }else {
+          console.log('all are filled up... and password match');
+          // console.log(formData, 'data passed', emailAddress, 'email passed too');
+          // const apiUpdatePassResponse = await updatePassword(formData, emailAddress);
+    
+          // if (apiUpdatePassResponse?.data?.success) {
+          //   dispatch({ type: "UPDATE_PASSWORD_SUCCESS", payload: apiUpdatePassResponse?.data?.payload });
+          //   swal({
+          //     text: "Password Update was Successful",
+          //     icon: "success",
+          //     button: false,
+          //     timer: 3000,
+          //   });
+          //   return navigate("/profile");
+          // }else if (!apiUpdatePassResponse?.data?.success) {
+          //   swal("Oops", apiUpdatePassResponse?.data?.message, "error", {
+          //     button: false,
+          //     timer: 3000,
+          //   });
+          // } else {
+          //   dispatch({
+          //     type: "LOGIN_FAILURE",
+          //     payload: apiUpdatePassResponse?.error,
+          //   });
+          //   swal("Oops", apiUpdatePassResponse?.message, "error", {
+          //     button: false,
+          //     timer: 3000,
+          //   });
+          // }
+  
+        }
+      }
+    // }
+
   }
   return (
     <>
       <ForgotPasswordStyle>
         <Logo />
         <div className="wrapper">
-          <h1>Forgot Password?</h1>
+          <div className="header-text-wrap">
+            <div className="back">
+              <span onClick={() => navigate(-1)}>
+                &lt; Back
+              </span>
+            </div>
+            <h1>Forgot Password?</h1>
+          </div>
           <Form>
             <p id="forgotpassword-description">
               Enter the email or password associated with your account and we'll

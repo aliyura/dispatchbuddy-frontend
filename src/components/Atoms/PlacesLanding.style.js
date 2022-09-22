@@ -1,16 +1,23 @@
 import styled from "styled-components";
 
-const PlaceStyle = styled.div`
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
-  padding: 0 2em;
+const PlaceLandingStyle = styled.div`
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+//   padding: 0 2em;
   h1 {
     width: 100%;
   }
   .forms {
     width: 100%;
-    padding-top: 2rem;
+    // padding-top: 2rem;
     // border: 2px solid red;
     font-size: 0.8rem;
+    label{
+        // border: 1px solid green;
+        // margin-left: 2.4rem;
+        font-size: 1rem;
+        line-height: 22px;
+        color: #1A1A1A;
+    }
     h1 {
       font-size: 2rem;
     }
@@ -24,7 +31,8 @@ const PlaceStyle = styled.div`
     }
     .form-style {
       width: 100%;
-      padding: 3rem 0;
+    //   padding: 3rem 0;
+    //   border: 1px solid yellow;
       padding: ${(props) => (props.locator ? "4rem 0" : "3rem 0")};
       display: flex;
       flex-direction: column;
@@ -42,7 +50,10 @@ const PlaceStyle = styled.div`
   .form-style{
     input{
       padding: 0.5rem 0.7rem;
-      margin-bottom: 0.7rem;
+    //   margin-bottom: 0.7rem;
+    width: 100%;
+    border: none;
+    outline: none;
     }
     // border: 1px solid red;
   }
@@ -50,6 +61,7 @@ const PlaceStyle = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    // border: 3px solid blue;
     .box{
       display: flex;
       justify-content: space-between;
@@ -62,7 +74,7 @@ const PlaceStyle = styled.div`
     .closer{
       font-size: 0.65rem;
       color: red;
-      margin-left: 0.45rem;
+    //   margin-left: 0.45rem;
     }
   }
   .btn-submit{
@@ -70,4 +82,4 @@ const PlaceStyle = styled.div`
   }
 `;
 
-export default PlaceStyle;
+export default PlaceLandingStyle;

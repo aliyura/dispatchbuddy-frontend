@@ -20,6 +20,7 @@ function RiderHistoryCard({rider}) {
         </div>
         <div className="rider-info_right">
           <p>Joined, {rider?.createdDate ? format(new Date(rider?.createdDate ), "yyyy-MM-dd") : "N/A"}</p>  
+          {/** Where we should send request to Rider as a user. */}
           <Button>Contact Rider</Button>
         </div>
       </div>

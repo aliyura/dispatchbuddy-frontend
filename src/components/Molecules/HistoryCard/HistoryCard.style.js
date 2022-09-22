@@ -29,6 +29,36 @@ const HistoryCardStyle = styled.div`
     background-color: #580aff;
     color: #fff;
   } */
+  .accept-reject {
+    display: flex;
+    width: 10em;
+    justify-content: space-between;
+  }
+  .outline {
+    background-color: #fff;
+    color: #580aff;
+    border: 1px solid #580aff;
+  }
+  .history-btn {
+    border-radius: 10px;
+    width: 48%;
+    transition: all 0.5s;
+  }
+  .status-reject {
+    color: red;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .status-complete {
+    color: #580aff;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .outline:hover,
+  .history-btn:hover {
+    background-color: rgba(88, 10, 255, 0.1);
+    color: #580aff;
+  }
 `;
 
 export default HistoryCardStyle;

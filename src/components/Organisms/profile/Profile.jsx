@@ -1,25 +1,58 @@
-import React, { useContext } from "react";
+import React, { useContext, useCallback, useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import { ProfileStyle } from "./profile.style";
 import Avatar_Img from "../../../assets/images/avatar_profile.png";
 import {ReactComponent as LockProfile} from "../../../assets/icons/Lock.svg";
 import {ReactComponent as Logout} from "../../../assets/icons/logout.svg";
-import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
+import { loadUser } from "../../../context/AuthProvider";
+import { getProfile } from "../../../api";
 
 function Profile() {
-  // "name":"Rabiu Aliyu",
-  // "country":"Nigeria",
-  // "city":"Lagos",
-  // "gender":"Male",
-  // "dateOfBirth":"02/04/1994"
-  const [state, dispatch] = useContext(AuthContext);
+  // eslint-disable-next-line no-unused-vars
+  const [, dispatch] = useContext(AuthContext);
+  const [userResult, setUserResult] = useState({});
+  const navigate = useNavigate();
+  const user = loadUser(localStorage.getItem('token'));
+  
+  const fetchUserDetails = useCallback(async () => {
+    let apiResponse = await getProfile(user?.id);
+    console.log(apiResponse, 'from get Profile on Profile Page')
+    if(apiResponse.data.success){
+      setUserResult(apiResponse.data?.payload);
+    }else if(!apiResponse.data.success){
 
-  console.log(state);
+      swal("Oops", apiResponse?.data?.message, "error", {
+        button: false,
+        timer: 3000,
+      });
+
+    }else {
+      //Error occured while fetching data
+      swal("Oops", apiResponse?.message, "error", {
+        button: false,
+        timer: 3000,
+      });
+    }
+
+  },[user?.id])
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, [fetchUserDetails])
 
   const handleLogout = () => {
-    // const { data, error } = logout(formData);
-    dispatch({ type: "LOGOUT" });
+    dispatch({ type: "LOGOUT", payload: null });
+    swal({
+      text: "Logged out Successfully",
+      icon: "success",
+      button: false,
+      timer: 3000,
+    });
+    return navigate("/");
   };
+  
   return (
     <ProfileStyle>
       <div>
@@ -28,9 +61,9 @@ function Profile() {
         </div>
         <div className="avatar_wrap">
           <figure>
-            <img src={Avatar_Img} alt="avatar img" />
-            <figcaption>Rabiu Deyems</figcaption>
-            <div className="role">Rider</div>
+            <img src={Avatar_Img || userResult?.dp} alt="avatar img" />
+            <figcaption>{userResult?.name}</figcaption>
+            <div className="role">{userResult?.accountType}</div>
           </figure>
         </div>
         <div className="list_action">
@@ -38,7 +71,7 @@ function Profile() {
             <li>
               <NavLink to={"/edit-profile"}>
                 <span className="edit-img-wrapper">
-                  <img src={Avatar_Img} alt="edit icon" />
+                  <img src={Avatar_Img || userResult?.dp} alt="edit icon" />
                 </span>
                 <span>Edit Profile</span>
               </NavLink>

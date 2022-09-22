@@ -13,6 +13,7 @@ const initial = {
   email: "",
   phoneNumber: "",
   password: "",
+  dateOfBirth: "",
 };
 function SignUp() {
   const [, dispatch] = useContext(AuthContext);
@@ -28,17 +29,18 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formComplete) alert("All fields are required");
+    if (!formComplete) swal("Oops", 'All fields are required', "error", {
+      button: false,
+      timer: 3000,
+    });
     else {
-      const { data, error } = await signup(formData);
-      // console.log(formData);
-      // console.log(data.data);
-      const { email } = data?.data?.payload;
-      if (data?.data?.success) {
-        console.log(data);
+      //TODO Validation of form here.
+      if(formData.dateOfBirth) formData.dateOfBirth = formData.dateOfBirth.replace(/-/g, '/');
+      const apiResponse = await signup(formData);
+      if (apiResponse?.data?.success) {
         dispatch({
           type: "SIGNUP_SUCCESS",
-          payload: email,
+          payload: formData.email,
         });
 
         swal({
@@ -48,13 +50,21 @@ function SignUp() {
           timer: 3000,
         });
         return navigate("/verification");
-      } else if (!data?.data?.success) {
-        swal("Oops", data?.data?.message, "error", {
+      } else if (!apiResponse?.data?.success) {
+        dispatch({
+          type: "SIGNUP_FAILURE",
+          payload: apiResponse?.error,
+        });
+        swal("Oops", apiResponse?.data?.message, "error", {
           button: false,
           timer: 3000,
         });
       } else {
-        swal("Oops", error, "error", {
+        dispatch({
+          type: "SIGNUP_FAILURE",
+          payload: apiResponse?.error,
+        });
+        swal("Oops", apiResponse?.message, "error", {
           button: false,
           timer: 3000,
         });
@@ -98,6 +108,13 @@ function SignUp() {
               placeholder="Enter your password"
               label="Password"
               name="password"
+              formData={formData}
+              handleChange={handleChange}
+            />
+            <Field
+              type="date"
+              label="Date of Birth"
+              name="dateOfBirth"
               formData={formData}
               handleChange={handleChange}
             />

@@ -3,6 +3,9 @@ import styled from "styled-components";
 const MyDeliveriesStyle = styled.main`
   width: 100%;
   position: relative;
+  .none {
+    text-align: center;
+  }
   h2 {
     font-size: 2.3rem;
     line-height: 2.79rem;
@@ -13,7 +16,7 @@ const MyDeliveriesStyle = styled.main`
     color: #580aff;
     padding: 3.58rem 0 3.58rem 16.53rem;
     background: rgba(88, 10, 255, 0.1);
-    border: 1px solid #580aff;
+    // border: 1px solid #580aff;
     margin-top: 7.6rem;
   }
   #deliveries {
@@ -27,8 +30,7 @@ const MyDeliveriesStyle = styled.main`
     .today h5 {
       margin-top: 0;
     }
-    
   }
 `;
 
-export default MyDeliveriesStyle
+export default MyDeliveriesStyle;

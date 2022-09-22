@@ -9,8 +9,7 @@
     { "path": "/", "text": "Home", "fill": "" },
     { "path": "/location", "text": "My Location", "fill": "" },
     { "path": "/my_deliveries", "text": "My Deliveries", "fill": "" },
+    { "path": "/my_request", "text": "Requests", "fill": "" },
     { "path": "/profile", "text": "dp", "fill": "" }
   ]
 }
-
-

@@ -7,18 +7,27 @@ import { getAllRequests } from "../../../api/auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { isToday, isYesterday, parseISO } from "date-fns/";
 import Modal from "react-modal";
-
 import Ratings from "../ratings/Ratings";
+import swal from "sweetalert";
+
 Modal.setAppElement("#root");
 
-function MyDeliveries() {
+function MyRequest() {
   const [, dispatch] = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
   const [rating, setRating] = useState(0);
 
+  const success = () => {
+       swal({
+         text: `Thank you for rating`,
+         icon: "success",
+         button: false,
+         timer: 3000,
+       });
+  }
   const handleRating = (value) => {
     setRating(value);
-    console.log(value);
+    success()
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -52,32 +61,27 @@ function MyDeliveries() {
 
   let todaysRequests = requests?.filter(
     (request) =>
-      (isToday(parseISO(request?.lastModifiedDate)) === true &&
-        request?.status === "CO") ||
-      (isToday(parseISO(request?.createdDate)) === true &&
-        request?.status === "CO")
+      isToday(parseISO(request?.lastModifiedDate)) === true ||
+      isToday(parseISO(request?.createdDate)) === true
   );
   let yesterdaysRequests = requests?.filter(
     (request) =>
-      (isYesterday(parseISO(request?.lastModifiedDate)) === true &&
-        request?.status === "CO") ||
-      (isYesterday(parseISO(request?.createdDate)) === true &&
-        request?.status === "CO")
+      isYesterday(parseISO(request?.lastModifiedDate)) === true ||
+      isYesterday(parseISO(request?.createdDate)) === true
   );
   let others = requests?.filter(
     (request) =>
       isToday(parseISO(request?.lastModifiedDate)) === false &&
       isYesterday(parseISO(request?.lastModifiedDate)) === false &&
       isToday(parseISO(request?.createdDate)) === false &&
-      isYesterday(parseISO(request?.createdDate)) === false &&
-      request?.status === "CO"
+      isYesterday(parseISO(request?.createdDate)) === false
   );
   return (
     <>
       <NavBar />
       <MyDeliveriesStyle>
         <div className="banner">
-          <h2>My Deliveries</h2>
+          <h2>All Requests</h2>
         </div>
         <PageStyle id="deliveries">
           <Modal
@@ -94,6 +98,9 @@ function MyDeliveries() {
               toggleModal={toggleModal}
             />
           </Modal>
+          {!todaysRequests && !yesterdaysRequests && !others && (
+            <h5 className="none">No requests!!</h5>
+          )}
           {todaysRequests?.length >= 1 && (
             <div className="today">
               <h5>Today</h5>
@@ -102,11 +109,12 @@ function MyDeliveries() {
                   onShow={toggleModal}
                   delivery={request}
                   key={index}
+                  request
                 />
               ))}
             </div>
           )}
-          {yesterdaysRequests?.length >= 1 ? (
+          {yesterdaysRequests?.length >= 1 && (
             <div className="yesterday">
               <h5>Yesterday</h5>
               {yesterdaysRequests?.map((request, index) => (
@@ -114,18 +122,12 @@ function MyDeliveries() {
                   onShow={toggleModal}
                   delivery={request}
                   key={index}
+                  request
                 />
               ))}
             </div>
-          ) : (
-            <>
-              <div className="yesterday">
-                <h5>Yesterday</h5>
-                You didn't have any Requests yesterday
-              </div>
-            </>
           )}
-          {others?.length >= 1 ? (
+          {others?.length >= 1 && (
             <div className="previous">
               <h5>Older requests</h5>
               {others?.map((request, index) => (
@@ -133,16 +135,10 @@ function MyDeliveries() {
                   onShow={toggleModal}
                   delivery={request}
                   key={index}
+                  request
                 />
               ))}
             </div>
-          ) : (
-            <>
-              <div className="previous">
-                <h5>Older requests</h5>
-                You have not any Requests Previously
-              </div>
-            </>
           )}
         </PageStyle>
       </MyDeliveriesStyle>
@@ -150,4 +146,4 @@ function MyDeliveries() {
   );
 }
 
-export default MyDeliveries;
+export default MyRequest;
